@@ -13,18 +13,24 @@ class sessionControl
     }
     public function showSession()
     {
-        echo "<pre>";
+        echo "<pre> <b>Information in current session</b><br><br>";
+        echo "ID of session:".session_id()."<br/>";
         print_r($_SESSION);
         echo "</pre>";
     }
     public function getSession(){
         return$_SESSION;
     }
+    public function resetSession()
+    {
+        $_SESSION=[];
+    }
+
 }
 
 $sessionNew = new sessionControl;
 
-$sessionNew->addSession("name1", "value1");
-$sessionNew->addSession("name2", "value2");
-$sessionNew->showSession();
-print_r($sessionNew->getSession());
+//$sessionNew->addSession("name1", "value1");
+//$sessionNew->addSession("name2", "value2");
+//$sessionNew->showSession();
+//print_r($sessionNew->getSession());
