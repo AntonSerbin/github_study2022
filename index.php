@@ -2,7 +2,6 @@
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 require_once 'Models/session.php';
-print_r($_POST);
 ?>
 
 <form action="./Controllers/login.php" method="post">
