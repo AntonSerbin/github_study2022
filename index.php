@@ -1,38 +1,28 @@
-﻿<?php
+<?php
+header('Cache-Control: no cache'); //no cache
+session_cache_limiter('private_no_expire'); // works
+session_start();
 
-use App\Models\Session;
+use Framework\Router\Router;
 
+//1. Общие настройки
+ini_set('display_errors', 1);
 error_reporting(E_ALL);
-ini_set("display_errors", 1);
+
+//2. Подключение файлов
+
+define("ROOT", dirname(__FILE__));
 require_once "vendor/autoload.php";
-//require_once 'Models/Session.php';
-//<form action="src/Controllers/login.php" method="post">
-//    Name: <input type="text" name="name"><br>
-//    E-mail: <input type="text" name="email"><br>
-//    Password: <input type="password" name="pswd"><br>
-//<input type="submit">
-//</form>
+echo " <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css' rel='stylesheet'
+          integrity='sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3' crossorigin='anonymous'>
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet'
+          integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>";
 
+//3. Подключаем базу данных
+// Looking for .env at the root directory
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
-echo "Login Page<br>";
-
-echo "<pre> <b>Posted information from login page</b><br><br>";
-print_r($_POST);
-echo "</pre>";
-
-
-$sessionNew = new Session();
-
-if ($_POST["name"] != "" || $_POST["email"] != "") {
-    $sessionNew->resetSession();
-    $sessionNew->addSession("name", $_POST["name"]);
-    $sessionNew->addSession("email", $_POST["email"]);
-    $hashed_password = password_hash($_POST["pswd"], PASSWORD_DEFAULT);
-    $sessionNew->addSession("pswd", $hashed_password);
-} else
-    echo "<br/>There is not enough information to change Session";
-
-$sessionNew->showSession();
-
-echo "<button onclick='window.location.href=`../../index_HW_Session.php`'>Return</button>";
-
+//4 Вызов Роутер
+$router = new Router();
+$router->run();

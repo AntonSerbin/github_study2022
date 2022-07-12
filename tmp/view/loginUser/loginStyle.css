@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.parent, .parentSettings {
+    display: flex;
+    width: 100%;
+    margin-left: 5%;
+}
+
+.parent aside {
+    width: 20%;
+    outline: 1px darkslategrey solid;
+}
+
+.parent aside button, .parent aside input, .parentSettings input {
+    margin: 4px 4px 4px 30px;
+}
+
+.parentSettings input {
+    margin-bottom: 20px;
+}
+
+.parentSettings button {
+    padding: 4px;
+}
+
+.parentSettings p:first-child {
+    margin-top: 10px;
+}
+
+.parent .data {
+    width: auto;
+    outline: 1px darkgreen solid;
+    padding: 4px 80px 4px 30px;
+}
