@@ -2,8 +2,12 @@
 header('Cache-Control: no cache'); //no cache
 session_cache_limiter('private_no_expire'); // works
 session_start();
+//session_destroy();
+//session_start();
+
 
 use Framework\Router\Router;
+use Framework\Session\SessionControl;
 
 //1. Общие настройки
 ini_set('display_errors', 1);
@@ -22,6 +26,9 @@ echo " <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstr
 // Looking for .env at the root directory
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
+
+//4. Влючаем фреймворк сессии
+$sessionControl = new SessionControl();
 
 //4 Вызов Роутер
 $router = new Router();

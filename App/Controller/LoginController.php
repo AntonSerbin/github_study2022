@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Framework\Database\ModelDB;
 use App\Entity\Login;
+use Framework\Session\SessionControl;
 
 //use PHPMailer\PHPMailer\PHPMailer;
 //use PHPMailer\PHPMailer\SMTP;
@@ -15,9 +16,10 @@ class LoginController
     public function actionShowUserForm()
     {
         echo "запустили actionShowUserForm - start";
-        require_once(ROOT . '/App/View/login/loginPage.php');
-
+        print_r(SessionControl::getSession());
         ModelDB::showTable('users');
+
+        require_once(ROOT . '/App/View/login/loginPage.php');
 
         return true;
     }
@@ -26,22 +28,29 @@ class LoginController
     public function actionCheckLogin()
     {
         echo "LoginController -> запустили actionCheckLogin<br>";
-        echo "Рост";
         print_r($_POST);
-        echo "<br><br>";
+        echo "<br>";
 
         $postData = ($_POST) ? true : false;
         if ($postData) {
             $uName = $_POST['uName'];
 //            $psw = md5($_POST['psw']);
             $psw = $_POST['psw'];
-            echo $psw."<br>";
+            echo $psw . "<br>";
             $res = Login::checkLogin($uName, $psw);
             echo "<br> res= ";
             print_r($res);
 
             if ($res) {
-                $this->writeLoginDataToSession($res);
+                print_r($res);
+                SessionControl::writeDataToSession('id_user', $res['id_user']);
+                SessionControl::writeDataToSession('email', $res['email']);
+                SessionControl::writeDataToSession('login', $res['login']);
+                SessionControl::writeDataToSession('firstname', $res['firstname']);
+                SessionControl::writeDataToSession('secondname', $res['secondname']);
+                SessionControl::writeDataToSession('phone', $res['phone']);
+
+
                 require_once(ROOT . '/App/View/login/correctLogin.php');
 
             } else {
@@ -54,46 +63,45 @@ class LoginController
         }
     }
 
-    public function writeLoginDataToSession($user)
-    {
-        echo "LoginController -> writeLoginToSession(id)<br>";
-//        $_SESSION['user']['id'] = $user['id'];
-//        $_SESSION['user']['email'] = $user['email'];
-//        $_SESSION['user']['login'] = $user['login'];
-
-        return true;
-    }
-
     public function actionLogout()
     {
-        echo "Вызван Логин-Controller->actionLogout<br>";
-
-//        unset($_SESSION['user']);
-//        (new LoginController)->actionShowUserForm();
+        echo "Вызван Логин-Controller->actionLogout1<br>";
+        SessionControl::unsetSession("user");
+        (new LoginController)->actionShowUserForm();
     }
+
+    public function actionRegisterUser()
+    {
+        require_once(ROOT . '/App/View/login/registerNewUser.php');
+    }
+
 
     public function actionAddNewUser()
     {
         echo "LoginController -> actionAddNewUser<br>";
-//        $login = $_POST['login'];
-//        $email = $_POST['email'];
+        $login = $_POST['login'];
+        $email = $_POST['email'];
 //        $psw = md5($_POST['psw']);
-//        $dataUser = ['login' => $login, 'email' => $email, "psw" => $psw];
+        $psw = $_POST['psw'];
+        $dataUser = ['login' => $login, 'email' => $email, 'password' => $psw];
 //        $alreadyRegistered = login::checkEmail($email);
-//        if ($alreadyRegistered) {
-//            require_once(ROOT . '/view/loginUser/badRegistrationEmail.php');
-//            return false;
-//        } else {
-//            login::addUserIntoDb($dataUser);
-//            require_once(ROOT . '/view/loginUser/newUserEntered.php');
-//            return true;
-//        }
+        $alreadyRegistered=ModelDB::read('users',"login",$login);
+        print_r($alreadyRegistered);
+        if ($alreadyRegistered) {
+            require_once(ROOT . '/App/View/login/badRegistrationEmail.php');
+            return false;
+        } else {
+
+            Login::addUserIntoDb($dataUser);
+            require_once(ROOT . '/App/View/login/newUserEntered.php');
+            return true;
+        }
     }
 
     public function actionRestoreFormPassword()
     {
         echo "LoginController -> actionRestoreFormPassword<br>";
-//        require_once(ROOT . '/view/loginUser/resetLoginForm.php');
+//        require_once(ROOT . '/App/View/login/resetLoginForm.php');
     }
 
     public function actionSendFormPassword()

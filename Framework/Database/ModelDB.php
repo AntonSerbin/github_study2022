@@ -3,6 +3,7 @@
 namespace Framework\Database;
 
 use Framework\Database\ConnectionDB;
+use function Symfony\Component\String\s;
 
 //use controllers\LoginController;
 //use frameworkVendor\ConnectionDBUsers;
@@ -19,14 +20,59 @@ class ModelDB
         return $elementsDB;
     }
 
-    public static function read($table,$column,$id)
+    public static function read($table, $column, $elem)
     {
         $pdo = ConnectionDB::getInstance()->getPdo();
-        $elementsDB = $pdo->query("select * from $table where $column=$id")->fetchAll();
+        $elementsDB = $pdo->query("select * from $table where $column = '$elem';")->fetchAll();
         return $elementsDB;
     }
 
+    public static function write($table, $column, $elem)
+    {
+        $pdo = ConnectionDB::getInstance()->getPdo();
+        echo $table, $column, $elem . '<br>';
+//        $sqlStr = "INSERT INTO '"."$table' ('"."$column') VALUE ('"."$elem');";
+        $sqlStr = "INSERT INTO users ($column) VALUES (" .
+            "'" . $elem . "');";
 
+        echo($sqlStr);
+        $insertStatement = $pdo->prepare($sqlStr);
+        if ($insertStatement->execute()) {
+            echo "New data  added to DB successfully";
+            return true;
+        } else {
+            echo "Unable to create user record";
+            die();
+        }
+        return true;
+    }
+
+    public static function writeStr($table, $arr)
+    {
+        $pdo = ConnectionDB::getInstance()->getPdo();
+        echo '<br>';
+
+        $sqlStr = "INSERT INTO $table (";
+        foreach ($arr as $key => $value) {
+            $sqlStr .= "$key".", ";
+        };
+        $sqlStr = substr($sqlStr, 0, -2). ") VALUES (";
+        foreach ($arr as $key => $value) {
+            $sqlStr .= "'$value" . "',";
+        };
+        $sqlStr= substr($sqlStr, 0, -1).");";
+        echo $sqlStr;
+
+        $insertStatement = $pdo->prepare($sqlStr);
+        if ($insertStatement->execute()) {
+            echo "New data  added to DB successfully";
+            return true;
+        } else {
+            echo "Unable to create user record";
+            die();
+        }
+        return true;
+    }
 
 //    /**
 //     * @param $email - email to check Data Base

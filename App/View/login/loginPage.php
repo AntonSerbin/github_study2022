@@ -23,9 +23,12 @@
                     <li class="nav-item "><a href="cart.html">Cart</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#" id="loginHeader">
-                            Login
-                        </a></li>
+                    <?php if (isset($_SESSION['user']['login'])) {
+                        echo "You entered as ".$_SESSION['user']['login'];
+                        echo '<li><a href="/logout" id="loginHeader"> LogOut </a></li>';
+                        } else {
+                        echo '<li><a href="#" id="loginHeader"> Login </a></li>';
+                        }?>
                 </ul>
             </div>
         </nav>
@@ -50,16 +53,24 @@
                 <div class="col-2 loginForm">
                     <form action="/checkPassword" method="post">
                         <div class="form-outline mb-4">
-                            <label class="form-label" >User Login</label>
+                            <label class="form-label">User Login</label>
                             <input name="uName" type="text" class="form-control" required value="Anton"/>
                         </div>
 
                         <div class="form-outline mb-4">
                             <input type="password" name="psw" id="form1Example2" class="form-control" required/>
-                            <label class="form-label" for="form1Example2" value="1"  >Password</label>
+                            <label class="form-label" for="form1Example2" value="1">Password</label>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">Sign in</button>
                     </form>
+                    <button id="signinButton"
+                            onclick="location.href='signin'"
+                            class='btn btn-primary btn-block'>SignIn new User
+                    </button>
+                    <button id="restoreButton"
+                            onclick="location.href='resetLoginForm.php'"
+                            class="btn btn-outline-danger btn-block">Reset Password
+                    </button>
                 </div>
             </div>
         </div>
@@ -82,7 +93,6 @@
     loginHeader.addEventListener('click', () => {
         document.querySelector(".loginForm").classList.add("active")
     });
-
 
 
 </script>

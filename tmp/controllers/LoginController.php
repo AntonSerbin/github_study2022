@@ -155,7 +155,7 @@ class LoginController
         (new LoginController)->actionShowUserForm();
     }
 
-    public function actionRegisterUser()
+    public static function actionRegisterUser()
     {
         require_once(ROOT . '/view/loginUser/registerNewUser.php');
     }
@@ -163,12 +163,12 @@ class LoginController
 
     public function actionAddNewUser()
     {
-//        echo "LoginController -> actionAddNewUser<br>";
+        echo "LoginController -> actionAddNewUser<br>";
         $login = $_POST['login'];
         $email = $_POST['email'];
         $psw = md5($_POST['psw']);
         $dataUser = ['login' => $login, 'email' => $email, "psw" => $psw];
-        $alreadyRegistered = login::checkEmail($email);
+        $alreadyRegistered = Login::checkEmail($email);
         if ($alreadyRegistered) {
             require_once(ROOT . '/view/loginUser/badRegistrationEmail.php');
             return false;
@@ -194,7 +194,7 @@ class LoginController
         if ($userArr) {
             $userN = $userArr['login'];
             $content = "Dear $userN,<br> You requested the reset of password.<br> Please, follow this link to change password:<br>";
-            $hash = crypt($email,rand());
+            $hash = crypt($email, rand());
             $hash = str_replace('/', '', $hash);
             $content .= " http://localhost:8181/modifyPassword/" . $hash;
             $res = Login::sendEmail($email, 'new Password PHP_Project: ' . date("h:i:sa"), $content);

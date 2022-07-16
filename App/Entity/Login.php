@@ -23,7 +23,7 @@ class Login
 
         foreach ($elementsDB as $user) {
             if ($user['login'] == $name && $user['password'] == $password) {
-                echo "password correct - ".$password."<br>";
+                echo "password correct - " . $password . "<br>";
                 return $user;
             }
         }
@@ -34,13 +34,6 @@ class Login
      * @param $email - email to check Data Base
      * @return true [array of values in string in DB] / false if there is no such email
      */
-    public static function checkEmail($email)
-    {
-        $pdo = ConnectionDB::getInstance()->getPdo();
-        $str = "select * from users WHERE email='$email'";
-        $elementsDB = $pdo->query($str)->fetch();
-        return $elementsDB;
-    }
 
     public static function checkHash($hash)
     {
@@ -122,24 +115,10 @@ class Login
     public static function addUserIntoDb($userData)
     {
         echo "models->addUserIntoDb<br>";
-        $credentials= require(ROOT . '/config/dbLogin_cnfg.php');
+        print_r($userData);
+        echo "models->addUserIntoDb END<br><br>";
 
-        $columnLogin = $credentials['columnUser'];
-        $columnPassword = $credentials['columnPassword'];
-        $columnEmail = $credentials['columnEmail'];
-        $pdo = ConnectionDB::getInstance()->getPdo();
-        $sqlStr = "INSERT INTO users ($columnLogin,$columnPassword,$columnEmail) VALUES (" .
-            "'" . $userData['login'] . "', " .
-            "'" . $userData['psw'] . "', " .
-            "'" . $userData['email'] . "');";
-        $insertStatement = $pdo->prepare($sqlStr);
-        if ($insertStatement->execute()) {
-            echo "New user " . $userData['login'] . " created successfully";
-            return true;
-        } else {
-            echo "Unable to create user record";
-            die();
-        }
+        ModelDB::writeStr("users", $userData);
     }
 
     public static function modifyUserInDb($idUser, $nameOfColumn, $newVolume)
