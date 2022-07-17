@@ -32,7 +32,7 @@ class Login
     public static function checkEmail($email)
     {
         $pdo = ConnectionDB::getInstance()->getPdo();
-        ModelDB::read('users',"email",$email);
+        $elementsDB = ModelDB::read('users',"email",$email);
 //        $str = "select * from users WHERE email='$email'";
         return $elementsDB;
     }

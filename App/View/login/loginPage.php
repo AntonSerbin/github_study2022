@@ -68,7 +68,7 @@
                             class='btn btn-primary btn-block'>SignIn new User
                     </button>
                     <button id="restoreButton"
-                            onclick="location.href='resetLoginForm.php'"
+                            onclick="location.href='resetLoginForm'"
                             class="btn btn-outline-danger btn-block">Reset Password
                     </button>
                 </div>

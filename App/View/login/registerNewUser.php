@@ -102,6 +102,13 @@
         <label for="psw-repeat"><b>Repeat Password</b></label>
         <input type="password" placeholder="Repeat Password" value="1" name="psw-repeat" required id="password_confirm"
                oninput="check(this)">
+        <label for="firstName"><b>First Name</b></label>
+        <input type="text" placeholder="Enter your name" value="Anton" name="firstName"  id="firstName"">
+        <label for="secondName"><b>Second Name</b></label>
+        <input type="text" placeholder="Enter your surname" value="Serbin" name="secondName"  id="secondName"">
+        <label for="phone"><b>Your phone number</b></label>
+        <input type="text" placeholder="Enter your phone" value="+380954381269" name="phone"  id="phone"">
+
 
         <script type='text/javascript'>
             function check(input) {

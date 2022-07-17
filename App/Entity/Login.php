@@ -30,6 +30,15 @@ class Login
         return false;
     }
 
+    public static function checkEmail($email)
+    {
+        echo "Entity->Login-> checkEmail<br>";
+        $elementsDB = ModelDB::read('users', "email", $email);
+//      $str = "select * from users WHERE email='$email'";
+        return $elementsDB[0];
+    }
+
+
     /**
      * @param $email - email to check Data Base
      * @return true [array of values in string in DB] / false if there is no such email
@@ -45,48 +54,48 @@ class Login
 
     public static function sendEmail($email, $subject, $content)
     {
-        require(ROOT . '/PHPMailer/src/Exception.php');
-        require(ROOT . '/PHPMailer/src/PHPMailer.php');
-        require(ROOT . '/PHPMailer/src/SMTP.php');
-
-        $smtpData = require(ROOT . '/config/emailSMTP_cnfg.php');
-        $smtpHost = $smtpData['smtpHost'];
-        $smtpUsername = $smtpData['smtpUsername'];
-        $smtpPassword = $smtpData['smtpPassword'];
-        $smtpPort = $smtpData['smtpPort'];
-        $setFromName = $smtpData['setFromName'];
-
-        $mail = new PHPMailer(true);
-
-        try {
-            //Server settings
-            $mail->SMTPDebug = SMTP::DEBUG_SERVER;             //Enable verbose debug output
-            $mail->isSMTP();                                   //Send using SMTP
-            $mail->Host = $smtpHost;              //Set the SMTP server to send through
-            $mail->SMTPAuth = true;                            //Enable SMTP authentication
-            $mail->Username = $smtpUsername;                  //SMTP username
-            $mail->Password = $smtpPassword;              //SMTP password!! NOT EMAIL!!
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;   //Enable implicit TLS encryption
-            $mail->Port = $smtpPort;                                 //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
-            //Recipients
-            $mail->setFrom($email, $setFromName);
-            $mail->addAddress($email);     //Add a recipient
-
-            //Content
-            $mail->isHTML(true);                 //Set email format to HTML
-            $mail->Subject = $subject;
-            $mail->Body = $content;
-
-            $mail->send();
-
-            echo 'Mail has been sent<br>';
-            return true;
-        } catch
-        (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo} <br>";
-            return false;
-        }
+//        require(ROOT . '/PHPMailer/src/Exception.php');
+//        require(ROOT . '/PHPMailer/src/PHPMailer.php');
+//        require(ROOT . '/PHPMailer/src/SMTP.php');
+//
+//        $smtpData = require(ROOT . '/config/emailSMTP_cnfg.php');
+//        $smtpHost = $smtpData['smtpHost'];
+//        $smtpUsername = $smtpData['smtpUsername'];
+//        $smtpPassword = $smtpData['smtpPassword'];
+//        $smtpPort = $smtpData['smtpPort'];
+//        $setFromName = $smtpData['setFromName'];
+//
+//        $mail = new PHPMailer(true);
+//
+//        try {
+//            //Server settings
+//            $mail->SMTPDebug = SMTP::DEBUG_SERVER;             //Enable verbose debug output
+//            $mail->isSMTP();                                   //Send using SMTP
+//            $mail->Host = $smtpHost;              //Set the SMTP server to send through
+//            $mail->SMTPAuth = true;                            //Enable SMTP authentication
+//            $mail->Username = $smtpUsername;                  //SMTP username
+//            $mail->Password = $smtpPassword;              //SMTP password!! NOT EMAIL!!
+//            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;   //Enable implicit TLS encryption
+//            $mail->Port = $smtpPort;                                 //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+//
+//            //Recipients
+//            $mail->setFrom($email, $setFromName);
+//            $mail->addAddress($email);     //Add a recipient
+//
+//            //Content
+//            $mail->isHTML(true);                 //Set email format to HTML
+//            $mail->Subject = $subject;
+//            $mail->Body = $content;
+//
+//            $mail->send();
+//
+//            echo 'Mail has been sent<br>';
+//            return true;
+//        } catch
+//        (Exception $e) {
+//            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo} <br>";
+//            return false;
+//        }
     }
 
     public static function readDataConnectionById($id)
