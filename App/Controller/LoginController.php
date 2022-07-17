@@ -88,7 +88,6 @@ class LoginController
             'secondName' => $_POST['secondName'],
             'phone' => $phone
         ];
-//        $alreadyRegistered = login::checkEmail($email);
         $alreadyRegistered = ModelDB::read('users', "email", $dataUser['email']);
         print_r($alreadyRegistered);
         if ($alreadyRegistered) {
@@ -117,7 +116,6 @@ class LoginController
         $userArr = Login::checkEmail($email);
         echo "<pre>";
         print_r($userArr);
-        echo $userArr['login'];
         echo "<br>";
         if ($userArr) {
             $userN = $userArr['login'];
@@ -126,15 +124,16 @@ class LoginController
                          Please, follow this link to change password:<br>";
             $hash = crypt($email, rand());
             $hash = str_replace('/', '', $hash);
-            $content .= " http://localhost:80/modifyPassword/" . $hash;
-            $res = (new MailerController())->sendEmail();
+            $content .= $_ENV['WEB_SITE']."modifyPassword/" . $hash;
 //            $res = MailerController::sendEmail($email, 'new Password PHP_Project: ' . date("h:i:sa"), $content);
 //            $res = login::sendEmail($email, 'new Password PHP_Project: ' . date("h:i:sa"), $content);
 //            login::modifyUserInDb($userArr['id'], "hash", $hash);
-            $res=false;
+            ModelDB::update('users',"hash",$hash,'id_user',$userArr['id_user']);
+            $res = (new MailerController())->sendEmail($email, 'new Password PHP_Project: ' . date("h:i:sa"), $content);
+
             if ($res) {
                 echo "Email has been send";
-                require_once(ROOT . 'App/View/login/newPasswordSentOK.php');
+                require_once(ROOT . '/App/View/login/newPasswordSentOK.php');
                 return true;
             } else {
                 echo "Email has NOT been send";
@@ -151,27 +150,29 @@ class LoginController
     public function actionRewritePasswordFromEmail()
     {
         echo "LoginController -> actionRewritePasswordFromEmail<br>";
-//        if (!empty($_SERVER['REQUEST_URI'])) {
-//            $uriArr = explode("/", $_SERVER['REQUEST_URI']);
-//        };
-//        $hashLink = end($uriArr);
-//        $userData = Login::checkHash($hashLink);
-//        if ($userData) {
-//            $_SESSION['changePasswordUser'] = $userData;
-//            require_once(ROOT . "/view/loginUser/enterNewPasswordForm.php");
-//        } else {
-//            echo "Wrong hash link";
-//            (new LoginController())->actionShowUserForm();
-//        }
+        if (!empty($_SERVER['REQUEST_URI'])) {
+            $uriArr = explode("/", $_SERVER['REQUEST_URI']);
+        };
+        $hashLink = end($uriArr);
+        $userData = Login::checkHash($hashLink);
+        if ($userData) {
+            $_SESSION['changePasswordUser'] = $userData;
+
+            require_once(ROOT . "/App/View/login/enterNewPasswordForm.php");
+        } else {
+            echo "Wrong hash link";
+            (new LoginController())->actionShowUserForm();
+        }
     }
 
     public function actionSaveNewPassword()
     {
         echo "LoginController -> actionSaveNewPassword<br>";
 //        $newPassword = md5($_POST['psw']);
-//        $id = $_SESSION['changePasswordUser']['id'];
-//        login::modifyUserInDb($id, 'password', $newPassword);
-//        unset($_SESSION['changePasswordUser']);
-//        (new LoginController())->actionShowUserForm();
+        $newPassword = $_POST['psw'];
+        $id = $_SESSION['changePasswordUser']['id_user'];
+        ModelDB::update('users','password',$newPassword,"id_user",$id);
+        unset($_SESSION['changePasswordUser']);
+        (new LoginController())->actionShowUserForm();
     }
 }

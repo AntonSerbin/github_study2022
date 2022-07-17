@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html>
 <style>
     body {
         font-family: Arial, Helvetica, sans-serif;
@@ -74,12 +72,12 @@
 
 <form action="/saveNewPassword" style="border:1px solid #ccc" method="post">
     <div class="container">
-        <h1><?php
+        <h7><?php
             $userEmail = $_SESSION['changePasswordUser']['email'];
             $userLogin = $_SESSION['changePasswordUser']['login'];
             echo "Your login -  <i style='color: darkblue'>$userLogin</i><br>
                   Your email <i style='color: darkblue'>$userEmail</i><br><br>
-                  Enter new password: "; ?></h1>
+                  Enter new password: "; ?></h7>
         <hr>
 
         <label for="pswNew"><b>Password</b></label>
@@ -106,4 +104,4 @@
 </form>
 
 </body>
-</html>
+

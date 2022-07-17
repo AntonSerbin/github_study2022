@@ -4,55 +4,37 @@ namespace Framework\Mail;
 
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\Mailer;
-use Symfony\Component\Mailer\Transport\SendmailTransport;
 use Symfony\Component\Mime\Email;
 
 use Symfony\Component\Mailer\Transport;
-//use Symfony\Component\Mailer\Mailer;
-//use Symfony\Component\Mime\Email;
-
-
-//use Symfony\Bundle\FramewoІrkBundle\Controller\AbstractController;
-//use Symfony\Component\HttpFoundation\Response;
-//use Symfony\Component\Mailer\MailerInterface;
-//use Symfony\Component\Mime\Email;
 
 class MailerController
 {
-
-    public function __constructor(): void
+    public function sendEmail($to,$subject,$text): bool
     {
-    }
-
-    /**
-     * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
-     */
-    public function sendEmail(): void
-    {
-        echo "<br>-----------1-------------<br>";
-        echo "<br>Framework\Mail\sendEmail - started <br> ";
-
-        $transport = Transport::fromDsn('gmail+smtp://boel.com.ua@gmail.com:xpinycgjamjtyliw@default');
+        $transport = Transport::fromDsn($_ENV['MAILER_DSN']);
         $mailer = new Mailer($transport);
-
 
         $email = (new Email())
             ->from('boel.com.ua@gmail.com')
-            ->to('antons.zn@gmail.com')
+            ->to($to)
             //->cc('cc@example.com')
             //->bcc('bcc@example.com')
             //->replyTo('fabien@example.com')
             //->priority(Email::PRIORITY_HIGH)
-            ->subject('Time for Symfony Mailer!')
-            ->text('Sending emails is fun again!')
-            ->html('<p>See Twig integration for better HTML integration!</p>');
+            ->subject($subject)
+//            ->text($text)
+            ->html($text)
+        ;
 
 
         try {
             $mailer->send($email);
-            echo "<br> sent good <br>";
+            echo "<br> sent good. <br>";
+            return true;
         } catch (TransportExceptionInterface $e) {
-        echo "error!!<br> $e";
+            echo "error!!<br> $e";
+            return "false error!";
         }
 
         echo "<br>---------------2------------<br>";

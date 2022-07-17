@@ -26,6 +26,8 @@ echo " <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstr
 // Looking for .env at the root directory
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
+$MAILER_DSN = $_ENV['MAILER_DSN'];
+
 
 //4. Влючаем фреймворк сессии
 $sessionControl = new SessionControl();

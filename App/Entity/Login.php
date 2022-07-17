@@ -35,7 +35,11 @@ class Login
         echo "Entity->Login-> checkEmail<br>";
         $elementsDB = ModelDB::read('users', "email", $email);
 //      $str = "select * from users WHERE email='$email'";
-        return $elementsDB[0];
+        if ($elementsDB) {
+            return $elementsDB[0];
+        } else {
+            return false;
+        }
     }
 
 
@@ -46,10 +50,11 @@ class Login
 
     public static function checkHash($hash)
     {
-        $pdo = ConnectionDB::getInstance()->getPdo();
-        $str = "select * from users WHERE hash='$hash'";
-        $elementsDB = $pdo->query($str)->fetch();
-        return $elementsDB;
+//        $pdo = ConnectionDB::getInstance()->getPdo();
+//        $str = "select * from users WHERE hash='$hash'";
+        $elementsDB = ModelDB::read('users',"hash",$hash);
+//        $elementsDB = $pdo->query($str)->fetch();
+        return $elementsDB[0];
     }
 
     public static function sendEmail($email, $subject, $content)

@@ -27,13 +27,12 @@ class ModelDB
         return $elementsDB;
     }
 
-    public static function write($table, $column, $elem)
+    public static function write($table, $column, $elem )
     {
         $pdo = ConnectionDB::getInstance()->getPdo();
         echo $table, $column, $elem . '<br>';
 //        $sqlStr = "INSERT INTO '"."$table' ('"."$column') VALUE ('"."$elem');";
-        $sqlStr = "INSERT INTO users ($column) VALUES (" .
-            "'" . $elem . "');";
+        $sqlStr = "INSERT INTO ".$table." $column VALUES (" ."'" . $elem . "');";
 
         echo($sqlStr);
         $insertStatement = $pdo->prepare($sqlStr);
@@ -46,6 +45,24 @@ class ModelDB
         }
         return true;
     }
+
+    public static function update($table, $column, $elem, $whereColumn, $whereElem)
+    {
+        $pdo = ConnectionDB::getInstance()->getPdo();
+        echo $table, $column, $elem , $whereColumn, $whereElem,'<br>';
+        $sqlStr = "UPDATE ".$table." SET $column = '".$elem."' WHERE ($whereColumn='".$whereElem."');";
+        echo($sqlStr);
+        $insertStatement = $pdo->prepare($sqlStr);
+        if ($insertStatement->execute()) {
+            echo "New data  added to DB successfully";
+            return true;
+        } else {
+            echo "Unable to create user record";
+            die();
+        }
+        return true;
+    }
+
 
     public static function writeStr($table, $arr)
     {
