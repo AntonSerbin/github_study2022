@@ -5,9 +5,10 @@ session_start();
 //session_destroy();
 //session_start();
 
-
 use Framework\Router\Router;
 use Framework\Session\SessionControl;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 
 //1. Общие настройки
 ini_set('display_errors', 1);
@@ -28,10 +29,14 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 $MAILER_DSN = $_ENV['MAILER_DSN'];
 
+//4 Создаем канал журнала
+$log = new Logger('php_nix_logger ');
+$log->pushHandler(handler: new StreamHandler(ROOT.'/monolog.log', level: Logger::DEBUG));
+$log->addRecord(\Monolog\Level::Info, "start index.php");
 
-//4. Влючаем фреймворк сессии
+//5. Включаем фреймворк сессии
 $sessionControl = new SessionControl();
 
-//4 Вызов Роутер
+//6 Вызов Роутер
 $router = new Router();
 $router->run();
