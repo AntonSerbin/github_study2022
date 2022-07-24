@@ -18,9 +18,9 @@
                     </a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li class="nav-item "><a href="index.html">Home</a></li>
-                    <li class="nav-item "><a href="goods.html">Goods</a></li>
-                    <li class="nav-item "><a href="cart.html">Cart</a></li>
+                    <li class="nav-item "><a href="index">Home</a></li>
+                    <li class="nav-item "><a href="goods">Goods</a></li>
+                    <li class="nav-item "><a href="cart">Cart</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <?php if (isset($_SESSION['user']['login'])) {

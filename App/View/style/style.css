@@ -26,12 +26,14 @@
 
 .left-handle {
     padding-left: 47px;
-    background: url("App/View/images/title-handle-left.png") left center no-repeat;
+    background: url("/App/View/images/title-handle-left.png") left center no-repeat;
+    width: 48px;
+    height: 40px;
 }
 
 .right-handle {
     padding-right: 47px;
-    background: url("App/View/images/title-handle-right.png") right center no-repeat;
+    background: url("/App/View/images/title-handle-right.png") right center no-repeat;
 }
 
 .nav-item {
@@ -95,8 +97,6 @@ main, header, footer {
 }
 
 
-
-
 /*old form styles*/
 /** {*/
 /*    margin: 0;*/
@@ -124,16 +124,6 @@ main, header, footer {
     padding: 0 16px;
 }
 
-.left-handle {
-    padding-left: 47px;
-    background: url("../images/title-handle-left.png") left center no-repeat;
-}
-
-.right-handle {
-    padding-right: 47px;
-    background: url("../images/title-handle-right.png") right center no-repeat;
-}
-
 .nav-item {
     margin: 1rem;
 }
@@ -150,7 +140,8 @@ main, header, footer {
     /*display: none;*/
     /*opacity:0;*/
 }
-#loginHeader{
+
+#loginHeader {
     margin-left: 10px;
 }
 
@@ -158,21 +149,24 @@ main, header, footer {
     display: block;
     transition: 2s;
     animation: show 2s;
-    opacity:1;
+    opacity: 1;
 
 }
-@keyframes show{
-    0%{
-        opacity:0;
+
+@keyframes show {
+    0% {
+        opacity: 0;
     }
     100% {
-        opacity:1;
+        opacity: 1;
     }
 }
+
 .sideNav {
     padding-right: 0;
 }
-.btnAddInfo{
+
+.btnAddInfo {
     width: 100%;
     background: darkcyan;
 }
@@ -184,4 +178,14 @@ main, header, footer {
 
 .imageMainProduct {
     height: 80%;
+}
+
+.card-img-top {
+    position: relative;
+}
+
+img.card-img-top {
+    /*width: 60%;*/
+    /*left: -70%;*/
+    border: 1px grey solid;
 }

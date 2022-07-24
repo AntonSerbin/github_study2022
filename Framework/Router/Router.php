@@ -2,14 +2,11 @@
 
 namespace Framework\Router;
 
-//use \LoginController;
-
 class Router
 {
     public function __construct()
     {
         $routePath = ROOT . '/App/config/routes.php';
-        echo $routePath;
         $this->routes = include($routePath);
     }
 
@@ -20,7 +17,6 @@ class Router
      */
     private function getUri()
     {
-        print_r(trim($_SERVER['REQUEST_URI']));
 
         if ($_SERVER['REQUEST_URI'] === '/') {
             return "/index";
@@ -48,8 +44,6 @@ class Router
                     $controllerName = array_shift($arr) . 'Controller';
                     $controllerName = ucfirst($controllerName);
                     $actionName = "action" . ucfirst(array_shift($arr));
-                    echo "<br>".$actionName."<br>";
-                    echo "<br>".$controllerName."<br>";
 
                     //нужна ли проверка Middleware
 //                    foreach ($middlewaresArr[1] as $middlewareEl) {

@@ -16,22 +16,14 @@ class LoginController
 {
     public function actionShowUserForm()
     {
-        echo "запустили actionShowUserForm - start";
-        print_r(SessionControl::getSession());
         ModelDB::showTable('users');
-
         require_once(ROOT . '/App/View/login/loginPage.php');
-
         return true;
     }
 
 
     public function actionCheckLogin()
     {
-        echo "LoginController -> запустили actionCheckLogin<br>";
-        print_r($_POST);
-        echo "<br>";
-
         $postData = ($_POST) ? true : false;
         if ($postData) {
             $uName = $_POST['uName'];

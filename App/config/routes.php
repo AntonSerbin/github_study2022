@@ -19,4 +19,9 @@ return array(
     'sendEmailRestore' => ['login/sendFormPassword'],
     'modifyPassword' => ['login/rewritePasswordFromEmail'],
     'saveNewPassword' => ['login/saveNewPassword'],
+
+    'goods' => ['data/showPageGoods'],
+    'requestData' => ['data/requestDataGoods'],
+
+
 );
