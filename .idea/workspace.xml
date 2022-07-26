@@ -2,10 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c574fcc-f74e-44f2-8ef8-d15cc9e11da8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/App/antons.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php_nix.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php_nix.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.php-cs-fixer.cache" beforeDir="false" afterPath="$PROJECT_DIR$/.php-cs-fixer.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/View/goods/goods.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/View/goods/goods.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monolog.log" beforeDir="false" afterPath="$PROJECT_DIR$/monolog.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index_HW_Session.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/PHPMailer/src/PHPMailer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/PHPMailer/src/PHPMailer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/PHPMailer/src/POP3.php" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/PHPMailer/src/POP3.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/PHPMailer/src/SMTP.php" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/PHPMailer/src/SMTP.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +72,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/google-mailer" />
       <path value="$PROJECT_DIR$/vendor/symfony/mailer" />
       <path value="$PROJECT_DIR$/vendor/symfony/sendgrid-mailer" />
-      <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/vendor/antonserbin/serbin_logger" />
     </include_path>
   </component>
   <component name="ProblemsViewState">
@@ -83,7 +92,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/antons/Desktop/php_nix/App/View&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/antons/Desktop/php_nix&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
@@ -92,10 +101,14 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/Framework/logger" />
       <recent name="$PROJECT_DIR$/App/View" />
       <recent name="$PROJECT_DIR$/App/Controller" />
       <recent name="$PROJECT_DIR$/App/View/login" />
-      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/App" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -118,6 +131,10 @@
       <workItem from="1658654285585" duration="1128000" />
       <workItem from="1658663535111" duration="597000" />
       <workItem from="1658675624904" duration="9168000" />
+      <workItem from="1658832604264" duration="7297000" />
+      <workItem from="1658843467692" duration="5431000" />
+      <workItem from="1658861142095" duration="965000" />
+      <workItem from="1658862173292" duration="2407000" />
     </task>
     <servers />
   </component>

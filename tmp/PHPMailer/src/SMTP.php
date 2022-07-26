@@ -124,14 +124,14 @@ class SMTP
      * Options:
      * * `echo` Output plain-text as-is, appropriate for CLI
      * * `html` Output escaped, line breaks converted to `<br>`, appropriate for browser output
-     * * `error_log` Output to error log as configured in php.ini
+     * * `error_log` Output to error Logger as configured in php.ini
      * Alternatively, you can provide a callable expecting two params: a message string and the debug level:
      *
      * ```php
      * $smtp->Debugoutput = function($str, $level) {echo "debug level $level; message: $str";};
      * ```
      *
-     * Alternatively, you can pass in an instance of a PSR-3 compatible logger, though only `debug`
+     * Alternatively, you can pass in an instance of a PSR-3 compatible Logger, though only `debug`
      * level output is used:
      *
      * ```php
@@ -258,7 +258,7 @@ class SMTP
         if ($level > $this->do_debug) {
             return;
         }
-        //Is this a PSR-3 logger?
+        //Is this a PSR-3 Logger?
         if ($this->Debugoutput instanceof \Psr\Log\LoggerInterface) {
             $this->Debugoutput->debug($str);
 
@@ -272,7 +272,7 @@ class SMTP
         }
         switch ($this->Debugoutput) {
             case 'error_log':
-                //Don't output, just log
+                //Don't output, just Logger
                 error_log($str);
                 break;
             case 'html':

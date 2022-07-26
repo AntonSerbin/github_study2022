@@ -214,7 +214,7 @@ class POP3
         $this->do_debug = $debug_level;
         $this->username = $username;
         $this->password = $password;
-        //Reset the error log
+        //Reset the error Logger
         $this->errors = [];
         //Connect
         $result = $this->connect($this->host, $this->port, $this->tval);
