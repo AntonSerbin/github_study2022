@@ -1,3 +1,45 @@
+<script defer>
+    const fillInHTMLItems = async () => {
+        const response = await fetch('http://localhost/requestDataPage');
+        console.log(response);
+        const json = await response.json();
+        console.log(json.length);
+        let htmlF = "";
+        for (let i = 0; i < json.length; i++) {
+            let hrefLinkItem = "product" + i;
+            htmlF +=
+                `<div class="col-4">
+            <div class="cardProduct">
+                <img class="card-img-top" src="/App/View/images/${json[i]['image_name']}" alt="Cake${i}">
+                    <div class="card-body">
+                        <h4 class="card-title"><a href=${hrefLinkItem}>${json[i]["title"]}</a></h4>
+                        <p class="card-text"> ${json[i]["title"]} </p>
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <p class="btn btn-danger btn-block p-2"> ${json[i]['price']} UAH</p>
+                            </div>
+                            <div>
+                                <a href="#" class="btn btn-success btn-block p-2">Add to cart</a>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <button class="btn btn-secondary btnAddInfo"
+                                        onclick="window.location.href=hrefLinkItem/${json[i]["image_name"]}">Additional info
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+                    </div>`;
+        }
+        const itemField = document.querySelector("#itemField");
+        itemField.innerHTML = htmlF;
+    }
+    fillInHTMLItems();
+</script>
+
 <style type="text/css" media="all">
     <?php echo file_get_contents(ROOT.'/App/View/style/style.css'); ?>
 
@@ -7,6 +49,7 @@
 <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet'
       integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>
 <body>
+
 <div class="indexWrapper">
 
     <button class="btn btn-primary btn-lg"
@@ -83,45 +126,5 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 
-<script defer>
-    const fillInHTMLItems = async () => {
-        const response = await fetch('http://localhost/requestDataPage',);
-        console.log(response);
-        const json = await response.json();
-        console.log(json);
-        let htmlF = "";
-        for (let i = 0; i <= 2; i++) {
-            let hrefLinkItem = "product" + i;
-            htmlF += `<div class="col-4">
-            <div class="cardProduct">
-                <img class="card-img-top" src="/App/View/images/${json[i]['image_name']}" alt="Cake${i}">
-                    <div class="card-body">
-                        <h4 class="card-title"><a href=${hrefLinkItem}>${json[i]["title"]}</a></h4>
-                        <p class="card-text"> ${json[i]["title"]} </p>
-                        <div class="d-flex justify-content-between">
-                            <div>
-                                <p class="btn btn-danger btn-block p-2"> ${json[i]['price']} UAH</p>
-                            </div>
-                            <div>
-                                <a href="#" class="btn btn-success btn-block p-2">Add to cart</a>
-                            </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col">
-                                <button class="btn btn-secondary btnAddInfo"
-                                        onclick="window.location.href=hrefLinkItem">Additional info
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-                    </div>`;
-        }
-        let itemField = document.querySelector("#itemField");
-        itemField.innerHTML = htmlF;
-        return htmlF;
-    }
-    fillInHTMLItems();
-</script>
 </body>
