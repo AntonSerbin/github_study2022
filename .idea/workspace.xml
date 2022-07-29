@@ -2,19 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c574fcc-f74e-44f2-8ef8-d15cc9e11da8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/App/antons.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php_nix.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php_nix.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Product.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ProductsList.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.php-cs-fixer.cache" beforeDir="false" afterPath="$PROJECT_DIR$/.php-cs-fixer.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Controller/DataController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/DataController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/View/goods/goods.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/View/goods/goods.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/View/login/loginPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/View/login/loginPage.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/antons.log" beforeDir="false" afterPath="$PROJECT_DIR$/App/antons.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/config/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/config/routes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Framework/Router/Router.php" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/Router/Router.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index_HW_Session.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tmp/PHPMailer/src/PHPMailer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/PHPMailer/src/PHPMailer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tmp/PHPMailer/src/POP3.php" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/PHPMailer/src/POP3.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tmp/PHPMailer/src/SMTP.php" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/PHPMailer/src/SMTP.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/view/tmp/view_datalist.php" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/view/tmp/view_datalist.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +30,15 @@
     <execution>
       <executable path="composer" />
     </execution>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Vue Single File Component" />
+        <option value="CSS File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -89,10 +102,12 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;last_opened_file_path&quot;: &quot;/home/antons/Desktop/php_nix&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
@@ -108,6 +123,7 @@
       <recent name="$PROJECT_DIR$/App/View/login" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/App" />
     </key>
   </component>
@@ -134,7 +150,10 @@
       <workItem from="1658832604264" duration="7297000" />
       <workItem from="1658843467692" duration="5431000" />
       <workItem from="1658861142095" duration="965000" />
-      <workItem from="1658862173292" duration="2407000" />
+      <workItem from="1658862173292" duration="2771000" />
+      <workItem from="1659010771525" duration="3882000" />
+      <workItem from="1659028646936" duration="13486000" />
+      <workItem from="1659044681489" duration="669000" />
     </task>
     <servers />
   </component>

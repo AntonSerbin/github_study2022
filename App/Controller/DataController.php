@@ -9,7 +9,7 @@ use Framework\Session\SessionControl;
 
 class DataController
 {
-    public function actionShowPageGoods()
+    public function actionShowPageGoods($param)
     {
 //        echo "<br>Action actionShowPageGoods started<br>";
         require_once(ROOT . '/App/View/goods/goods.php');
@@ -22,6 +22,14 @@ class DataController
         echo json_encode($listOfGoods);
     }
 
+    public function actionShowPageItem($params)
+    {
+
+        echo "Вызван DataController->actionShowPageItem<br>";
+        var_dump($params);
+
+        return true;
+    }
 
     public function actionShowData()
     {

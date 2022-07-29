@@ -1,5 +1,5 @@
 <style type="text/css" media="all">
-    <?php echo file_get_contents(ROOT.'/App/View/style/style.css'); ?>
+    <?php echo file_get_contents(ROOT.'/App/View/style/styles.css'); ?>
 </style>
 
 <body>

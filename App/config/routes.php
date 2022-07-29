@@ -21,7 +21,6 @@ return array(
     'saveNewPassword' => ['login/saveNewPassword'],
 
     'goods' => ['data/showPageGoods'],
-    'requestData' => ['data/requestDataGoods'],
-
-
+    'requestDataPage' => ['data/requestDataGoods'],
+    "items/:id" => ['data/showPageItem']
 );

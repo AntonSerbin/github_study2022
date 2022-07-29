@@ -1,6 +1,7 @@
 {
     "name": "antons/php_nix",
     "type": "project",
+
     "autoload": {
         "psr-4": {
             "App\\": "App/",

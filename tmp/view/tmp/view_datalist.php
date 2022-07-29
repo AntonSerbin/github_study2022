@@ -106,7 +106,7 @@ function addTotalArrSQL($arrElements, $providedColumnName, $arrTotal)
 //выводим таблицу общий массив в формате HTML
 function showArray()
 {
-    echo "<link rel='stylesheet' href='../style.css'>";
+    echo "<link rel='stylesheet' href='../styles.css'>";
     echo "<table>
     <tr>
     <th>Source</th>

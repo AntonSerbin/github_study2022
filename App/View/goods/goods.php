@@ -26,7 +26,7 @@
                         <div class="row">
                             <div class="col">
                                 <button class="btn btn-secondary btnAddInfo"
-                                        onclick="window.location.href=hrefLinkItem/${json[i]["image_name"]}">Additional info
+                                        onclick="window.location.href = '/items/${json[i]['id_good']}'">Additional info
                                 </button>
                             </div>
                         </div>
@@ -41,7 +41,7 @@
 </script>
 
 <style type="text/css" media="all">
-    <?php echo file_get_contents(ROOT.'/App/View/style/style.css'); ?>
+    <?php echo file_get_contents(ROOT.'/App/View/style/styles.css'); ?>
 
 </style>
 <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css' rel='stylesheet'
