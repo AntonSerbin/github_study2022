@@ -20,7 +20,13 @@ return array(
     'modifyPassword' => ['login/rewritePasswordFromEmail'],
     'saveNewPassword' => ['login/saveNewPassword'],
 
-    'goods' => ['data/showPageGoods'],
+    'makeJSON/:request' => ['makeJSON/showJSON'],
+
+    'goods/:category' => ['data/showPageGoods'],
     'requestDataPage' => ['data/requestDataGoods'],
-    "items/:id" => ['data/showPageItem']
+    "items/:id" => ['data/showPageItem'],
+
+    'cart' => ['data/cart'],
+
+    'placedOrder' => ['data/placedOrder']
 );

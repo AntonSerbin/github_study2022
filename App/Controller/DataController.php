@@ -6,27 +6,50 @@ use Framework\Database\ModelDB;
 use App\Entity\Login;
 use Framework\Mail\MailerController;
 use Framework\Session\SessionControl;
+use App\Controller\MakeJSONController;
 
 class DataController
 {
+    public function actionPlacedOrder()
+    {
+        echo "Вызван DataController->actionPlacedOrder<br>";
+        echo "POST:<br>";
+        var_dump($_POST);
+
+    }
+
+    public function actionCart()
+    {
+        echo "Вызван DataController->actionCart<br>";
+        require_once(ROOT . '/App/View/cart/cart.html');
+        return true;
+    }
+
     public function actionShowPageGoods($param)
     {
-//        echo "<br>Action actionShowPageGoods started<br>";
+//        $arrListItems = $this->actionRequestDataGoods("goods", "category", $param['category']);
         require_once(ROOT . '/App/View/goods/goods.php');
         return true;
     }
 
-    public function actionRequestDataGoods()
+    public function actionRequestDataGoods($table, $column, $elem)
     {
-        $listOfGoods = ModelDB::showTable("goods");
-        echo json_encode($listOfGoods);
+        if (!$column || $elem === "all") {
+            $listOfGoods = ModelDB::showTable($table);
+        } else {
+            $listOfGoods = ModelDB::read($table, $column, $elem);
+        }
+        return $listOfGoods;
     }
 
     public function actionShowPageItem($params)
     {
-
         echo "Вызван DataController->actionShowPageItem<br>";
         var_dump($params);
+        echo "<br>";
+        $itemInfo = ModelDB::read("goods", "id_good", $params["id"]);
+        var_dump($itemInfo);
+        require_once(ROOT . '/App/View/goods/item.html');
 
         return true;
     }

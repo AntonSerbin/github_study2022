@@ -1,11 +1,16 @@
 @import "~bootstrap";
 
+#app main {
+    outline: none;
+}
+
 body {
     background-color: #edf2f9;
 }
 
 #cartModal .modal-dialog {
     max-width: 60%;
+
 }
 
 .cart-table thead {
@@ -18,6 +23,7 @@ body {
 
 .table.cart-table > :not(:last-child) > :last-child > * {
     border-bottom-color: #dee2e6;
+
 }
 
 .table.cart-table tfoot td {

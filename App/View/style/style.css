@@ -3,6 +3,7 @@
 /*    padding: 0;*/
 /*}*/
 
+
 .indexWrapper {
     width: 85%;
     margin: auto;
@@ -164,6 +165,16 @@ main, header, footer {
 
 .sideNav {
     padding-right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.sideNav .left, .sideNav .right {
+    display: flex;
+    align-items: center;
+}
+.sideNav .right {
+    justify-content: flex-end;
 }
 
 .btnAddInfo {

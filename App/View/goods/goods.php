@@ -1,6 +1,11 @@
 <script defer>
     const fillInHTMLItems = async () => {
-        const response = await fetch('http://localhost/requestDataPage');
+        let url = document.URL;
+        index = url.lastIndexOf("goods/");
+        params = url.slice(index).replace("goods/","");
+        console.log(params);
+        requestStr = `http://localhost/makeJSON/goods=${params}`;
+        const response = await fetch(requestStr);
         console.log(response);
         const json = await response.json();
         console.log(json.length);
@@ -39,22 +44,18 @@
     }
     fillInHTMLItems();
 </script>
+<!--<link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">-->
 
-<style type="text/css" media="all">
-    <?php echo file_get_contents(ROOT.'/App/View/style/styles.css'); ?>
+<style media="all">
+
+    <?php echo file_get_contents(ROOT.'/node_modules/bootstrap/dist/css/bootstrap.css'); ?>
+    <?php echo file_get_contents(ROOT.'/App/View/style/style.css'); ?>
 
 </style>
-<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css' rel='stylesheet'
-      integrity='sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3' crossorigin='anonymous'>
-<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet'
-      integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>
+
 <body>
 
 <div class="indexWrapper">
-
-    <button class="btn btn-primary btn-lg"
-            onclick="window.location.href='/requestDataPage'">Show page RequestDataGoods
-    </button>
 
     <header>
         <nav class="navbar">
@@ -63,26 +64,27 @@
                     <a class="navbar-brand" href="#">
                         <h1 class="section-title">
                             <span class="left-handle"></span>
-                            <span class="title-text">List of goods</span>
+                            <span class="title-text">HW AntonSerbin</span>
                             <span class="right-handle"></span>
                         </h1>
                     </a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li class="nav-item "><a href="index">Home</a></li>
-                    <li class="nav-item "><a href="#">Goods</a></li>
-                    <li class="nav-item "><a href="cart">Cart</a></li>
+                    <li class="nav-item "><a href="/index">Home</a></li>
+                    <li class="nav-item "><a href="/goods/category=all">Goods</a></li>
+                    <li class="nav-item "><a href="/cart">Cart</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="login" id="loginPageHeader">
-                            LoginPage
-                        </a></li>
-
+                    <?php if (isset($_SESSION['user']['login'])) {
+                        echo "You entered as " . $_SESSION['user']['login'];
+                        echo '<li><a href="/logout" id="loginHeader"> LogOut </a></li>';
+                    } else {
+                        echo '<li><a href="#" id="loginHeader"> Login </a></li>';
+                    } ?>
                 </ul>
-
-
             </div>
         </nav>
+
     </header>
 
     <main>
@@ -97,11 +99,9 @@
                     <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Categories
                     </div>
                     <ul class="list-group category_block">
-                        <li class="list-group-item"><a href="#">Butter Cake</a></li>
-                        <li class="list-group-item"><a href="#">Pound Cake</a></li>
-                        <li class="list-group-item"><a href="#">Sponge Cake</a></li>
-                        <li class="list-group-item"><a href="#">Genoise Cake</a></li>
-                        <li class="list-group-item"><a href="#">Biscuit Cake</a></li>
+                        <li class="list-group-item"><a href="/goods/category=all">All Cakes</a></li>
+                        <li class="list-group-item"><a href="/goods/category=classic">Classic Cake</a></li>
+                        <li class="list-group-item"><a href="/goods/category=wosugar">Cake w/o sugar</a></li>
                     </ul>
                 </div>
             </div>

@@ -23,6 +23,7 @@ class ModelDB
     public static function read($table, $column, $elem)
     {
         $pdo = ConnectionDB::getInstance()->getPdo();
+//        dd("select * from $table where $column = '$elem';");
         $elementsDB = $pdo->query("select * from $table where $column = '$elem';")->fetchAll();
         return $elementsDB;
     }
@@ -49,7 +50,7 @@ class ModelDB
     public static function update($table, $column, $elem, $whereColumn, $whereElem)
     {
         $pdo = ConnectionDB::getInstance()->getPdo();
-        echo $table, $column, $elem , $whereColumn, $whereElem,'<br>';
+//        echo $table, $column, $elem , $whereColumn, $whereElem,'<br>';
         $sqlStr = "UPDATE ".$table." SET $column = '".$elem."' WHERE ($whereColumn='".$whereElem."');";
         echo($sqlStr);
         $insertStatement = $pdo->prepare($sqlStr);

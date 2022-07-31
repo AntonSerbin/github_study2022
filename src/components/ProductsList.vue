@@ -5,12 +5,14 @@
         <div class="row">
           <product
               v-for="product in products"
-              :key="product.id"
-              :name="product.name"
+              :key="product.id_good"
+              :id="product.id_good"
+              :name="product.title"
               :category="product.category"
               :price="product.price"
-              :image="product.image"
-              :is-available="product.is_available"
+              :image="product.image_name"
+              :is-available="true"
+              @add-to-cart="addProductToCart(product)"
           />
         </div>
       </div>
@@ -26,22 +28,28 @@ export default {
     Product,
   },
   data: () => ({
-    products: [
-      {
-        name: "Apple MacBook Pro 13-inch Space Gray Late 2020 (Apple Silicon M1, 16GB RAM, 256GB SSD)",
-        category: "Computer & Accessories",
-        price: 1499,
-        image: "./img/macbook-pro.jpeg",
-        is_available: true,
-      },
-      {
-        name: "Apple iMac 21.5 with Retina 4K display 2019",
-        category: "Computer & Accessories",
-        price: 1299,
-        image: "./img/imac.jpeg",
-        is_available: false,
-      }
-    ],
+    products: [],
   }),
+  mounted() {
+    this.fetchProducts();
+  },
+  methods: {
+    async fetchProducts() {
+      try {
+        // const response = await fetch("http://localhost:3000/products");
+        const response = await fetch("http://localhost/makeJSON/goods=category=all");
+        console.log("response Vue");
+        console.log(response);
+        this.products = await response.json();
+        console.log("response response.json() Vue");
+        console.log(this.products[0]);
+      } catch (e) {
+        console.error("Fetching error");
+      }
+    },
+    addProductToCart(product) {
+      this.$root.addProductToCart(product);
+    },
+  },
 }
 </script>

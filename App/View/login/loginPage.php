@@ -1,8 +1,8 @@
-<style type="text/css" media="all">
-    <?php echo file_get_contents(ROOT.'/App/View/style/styles.css'); ?>
-</style>
-
 <body>
+<style type="text/css" media="all">
+    <?php echo file_get_contents(ROOT.'/node_modules/bootstrap/dist/css/bootstrap.css'); ?>
+    <?php echo file_get_contents(ROOT.'/App/View/style/style.css'); ?>
+</style>
 <div class="indexWrapper">
 
     <header>
@@ -18,17 +18,17 @@
                     </a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li class="nav-item "><a href="index">Home</a></li>
-                    <li class="nav-item "><a href="goods">Goods</a></li>
-                    <li class="nav-item "><a href="cart">Cart</a></li>
+                    <li class="nav-item "><a href="/index">Home</a></li>
+                    <li class="nav-item "><a href="/goods/category=all">Goods</a></li>
+                    <li class="nav-item "><a href="/cart">Cart</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <?php if (isset($_SESSION['user']['login'])) {
-                        echo "You entered as ".$_SESSION['user']['login'];
+                        echo "You entered as " . $_SESSION['user']['login'];
                         echo '<li><a href="/logout" id="loginHeader"> LogOut </a></li>';
-                        } else {
+                    } else {
                         echo '<li><a href="#" id="loginHeader"> Login </a></li>';
-                        }?>
+                    } ?>
                 </ul>
             </div>
         </nav>
@@ -81,6 +81,7 @@
             <a href="#"> HW Nix</a>
         </div>
     </footer>
+
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -96,4 +97,15 @@
 
 
 </script>
+
+
+<script src="public/js/main.js"></script>
+
 </body>
+<script>
+    import ProductsList from "../../../src/components/ProductsList";
+
+    export default {
+        components: {ProductsList}
+    }
+</script>

@@ -23,6 +23,11 @@ class SessionControl
         return true;
     }
 
+    public static function clearJSONSession()
+    {
+        unset($_SESSION["user"]["jsonArr"]);
+    }
+
     public static function unsetSession($title)
     {
         unset($_SESSION[$title]);
