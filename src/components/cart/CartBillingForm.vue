@@ -39,9 +39,6 @@
 </template>
 
 <script>
-window.axios = require('axios');
-
-
 export default {
   name: "CartBillingForm",
   data: () => ({
@@ -68,23 +65,13 @@ export default {
     },
   },
   methods: {
-    async placeOrderOrig() {
-    },
 
-    sendIdentity: async function() {
-      try {
-        console.log("sendIdentity");
-
-        const {data} = await axios.post('https://localhost/test.php', "stringg");
-        console.log(data);
-      } catch(e) {
-        console.log(e);
-      }
-    },
-    showData:  function() {
+    showData: function () {
+      console.log("showData");
+      console.log(this.$root.cartProducts);
       fetch('http://localhost/placedOrder', {
-        method:"POST",
-        body: JSON.stringify({sdfsdfsdfsdffds:2323})
+        method: "POST",
+        body: JSON.stringify(this.$root.cartProducts)
       })
     },
 
