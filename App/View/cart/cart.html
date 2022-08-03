@@ -1,10 +1,8 @@
-<head>
-    <meta charset="UTF-8">
-</head>
+<!--<link rel="stylesheet" href="/App/View/style/style.css">-->
 <body>
 <style type="text/css" media="all">
-    <?php echo file_get_contents(ROOT.'/node_modules/bootstrap/dist/css/bootstrap.css'); ?>
-     <?php echo file_get_contents(ROOT.'/App/View/style/style.css'); ?>
+    /*<?php echo file_get_contents(ROOT.'/node_modules/bootstrap/dist/css/bootstrap.css'); ?>*/
+    /*<?php echo file_get_contents(ROOT.'/App/View/style/style.css'); ?>*/
 </style>
 <div class="indexWrapper">
     <header>
@@ -29,16 +27,19 @@
                         echo "You entered as " . $_SESSION['user']['login'];
                         echo '<li><a href="/logout" id="loginHeader"> LogOut </a></li>';
                     } else {
-                    echo '<li><a href="#" id="loginHeader"> Login </a></li>';
+                    echo '
+                    <li><a href="/login" id="loginHeader"> Login </a></li>
+                    ';
                     } ?>
                 </ul>
+
             </div>
         </nav>
     </header>
-    <div class="row">
-        <div class="sideNav">
+
+    <div class="sideNav row">
             <div class="right">
-                <div class="card-header bg-primary text-white text-uppercase" >
+                <div class="card-header bg-primary text-white text-uppercase">
                     <i class="fa fa-list"></i> Categories
                 </div>
                 <ul class="list-group list-group-horizontal">
@@ -48,17 +49,18 @@
                 </ul>
             </div>
         </div>
-    </div>
-
     <div id="app">
         <main>
-            <cart-button style="display:block; margin:20px auto"></cart-button>
-            <products-list></products-list>
-            <cart-modal></cart-modal>
 
+            <cart-button
+                    style="display:block;
+                    margin:20px auto;
+                    transform: scale(200%);
+                    position: absolute">
+            </cart-button>
+            <products-list></products-list>
         </main>
     </div>
 </div>
 <script src="/public/js/main.js"></script>
 </body>
-</html>

@@ -36,12 +36,11 @@ export default {
   methods: {
     async fetchProducts() {
       try {
-        // const response = await fetch("http://localhost:3000/products");
         const response = await fetch("http://localhost/makeJSON/goods=category=all");
-        console.log("response Vue");
+        console.log("response Vue ProductList");
         console.log(response);
         this.products = await response.json();
-        console.log("response response.json() Vue");
+        console.log("response response.json() Vue ProductList");
         console.log(this.products[0]);
       } catch (e) {
         console.error("Fetching error");

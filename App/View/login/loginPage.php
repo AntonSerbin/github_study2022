@@ -9,7 +9,7 @@
         <nav class="navbar">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="/login">
                         <h1 class="section-title">
                             <span class="left-handle"></span>
                             <span class="title-text">HW AntonSerbin</span>
@@ -27,7 +27,7 @@
                         echo "You entered as " . $_SESSION['user']['login'];
                         echo '<li><a href="/logout" id="loginHeader"> LogOut </a></li>';
                     } else {
-                        echo '<li><a href="#" id="loginHeader"> Login </a></li>';
+                        echo '<li><a href="/login" id="loginHeader"> Login </a></li>';
                     } ?>
                 </ul>
             </div>
@@ -83,10 +83,7 @@
     </footer>
 
 </div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<!--<script src="script.js"></script>-->
+
 <script>
 
     let loginHeader = document.querySelector("#loginHeader");
@@ -102,10 +99,3 @@
 <script src="public/js/main.js"></script>
 
 </body>
-<script>
-    import ProductsList from "../../../src/components/ProductsList";
-
-    export default {
-        components: {ProductsList}
-    }
-</script>

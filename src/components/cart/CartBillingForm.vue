@@ -1,10 +1,10 @@
 <template>
-<!--  action="/placedOrder"  @submit.prevent="showData"  -->
-  <form @submit.prevent="showData"  method="POST" class="row g-3 mb-3" novalidate >
+  <!--  action="/placedOrder"  @submit.prevent="showData" action="/placedOrder" -->
+  <form method="POST" class="row g-3 mb-3" novalidate  @submit.prevent="showData">
     <h5>Billing details</h5>
     <div class="col-md-6">
       <label for="firstName" class="form-label">First Name</label>
-      <input v-model="firstName"  type="text" :class="{ 'form-control': true, 'is-invalid': firstNameInvalidMsg }"
+      <input v-model="firstName" type="text" :class="{ 'form-control': true, 'is-invalid': firstNameInvalidMsg }"
              id="firstName" placeholder="First Name">
       <div v-if="firstNameInvalidMsg" class="invalid-feedback">
         {{ firstNameInvalidMsg }}
@@ -31,7 +31,8 @@
       <input v-model="phone" type="text" class="form-control" id="phone" placeholder="+38(099) 999-99-99">
     </div>
     <div class="col-12 d-flex justify-content-end">
-      <button :disabled="isPlaceOrderDisabled"  class="btn btn-success" v-on:click="showData">
+      <button :disabled="isPlaceOrderDisabled" class="btn btn-success"  >
+        <!--        -->
         Place Order
       </button>
     </div>
@@ -66,19 +67,27 @@ export default {
   },
   methods: {
 
-    showData: function () {
-      console.log("showData");
-      console.log(this.$root.cartProducts);
-      fetch('http://localhost/placedOrder', {
+    showData:  async function sync() {
+      let cartInfo = {
+        "firstName": this.firstName,
+        "lastName": this.lastName,
+        "city": this.city,
+        "address": this.address,
+        "email": this.email,
+        "phone": this.phone,
+        "cartGoods": this.$root.cartProducts
+      }
+
+      let formData = new FormData();
+      formData.append('cart', JSON.stringify(cartInfo));
+
+      await fetch('http://localhost/placedOrder', {
         method: "POST",
-        body: JSON.stringify(this.$root.cartProducts)
+        body: formData
       })
+      // location.replace("http://localhost/showOrder");
     },
 
-      // console.log(this.$root.cartProducts);
-      // localStorage.setItem("cartItems", JSON.stringify(this.$root.cartProducts));
-      // console.log('cart local store');
-      // console.log(localStorage.cartItems);
   },
 }
 </script>

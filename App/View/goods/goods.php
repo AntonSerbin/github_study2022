@@ -44,17 +44,14 @@
     }
     fillInHTMLItems();
 </script>
-<!--<link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">-->
-
-<style media="all">
-
+<!--<head>-->
+<!--    <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">-->
+<!--</head>-->
+<body>
+<style type="text/css" media="all">
     <?php echo file_get_contents(ROOT.'/node_modules/bootstrap/dist/css/bootstrap.css'); ?>
     <?php echo file_get_contents(ROOT.'/App/View/style/style.css'); ?>
-
 </style>
-
-<body>
-
 <div class="indexWrapper">
 
     <header>
@@ -110,7 +107,7 @@
 
     <footer class="page-footer font-small blue">
         <div class="footer-copyright text-center py-3">© 2022 Copyright:
-            <a href="index.html"> HW Nix</a>
+            <a href="index.html"> HW Nix </a>
         </div>
     </footer>
 </div>
@@ -118,13 +115,13 @@
 <!-- JavaScript Bundle with Popper -->
 
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+<!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"-->
+<!--        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"-->
+<!--        crossorigin="anonymous"></script>-->
+<!---->
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"-->
+<!--        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"-->
+<!--        crossorigin="anonymous"></script>-->
 
 
 </body>

@@ -7,11 +7,6 @@ use App\Entity\Login;
 use Framework\Mail\MailerController;
 use Framework\Session\SessionControl;
 
-//use PHPMailer\PHPMailer\PHPMailer;
-//use PHPMailer\PHPMailer\SMTP;
-//use PHPMailer\PHPMailer\Exception;
-
-
 class LoginController
 {
     public function actionShowUserForm()

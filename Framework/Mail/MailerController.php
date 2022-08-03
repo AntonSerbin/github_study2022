@@ -24,9 +24,10 @@ class MailerController
             //->priority(Email::PRIORITY_HIGH)
             ->subject($subject)
 //            ->text($text)
-            ->html($text)
-        ;
-
+            ->html($text);
+        $headers = $email->getHeaders();
+        $headers->addHeader('X-Auto-Response-Suppress', 'OOF, DR, RN, NRN, AutoReply');
+        $email->setHeaders($headers);
 
         try {
             $mailer->send($email);

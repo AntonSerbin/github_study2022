@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import CartModal from "./cart/CartModal";
+
 export default {
   name: "CartButton",
   computed: {

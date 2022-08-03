@@ -16,6 +16,7 @@ class ModelDB
     public static function showTable($name)
     {
         $pdo = ConnectionDB::getInstance()->getPdo();
+//        dd("select * from $name");
         $elementsDB = $pdo->query("select * from $name")->fetchAll();
         return $elementsDB;
     }
@@ -53,6 +54,20 @@ class ModelDB
 //        echo $table, $column, $elem , $whereColumn, $whereElem,'<br>';
         $sqlStr = "UPDATE ".$table." SET $column = '".$elem."' WHERE ($whereColumn='".$whereElem."');";
         echo($sqlStr);
+        $insertStatement = $pdo->prepare($sqlStr);
+        if ($insertStatement->execute()) {
+            echo "New data  added to DB successfully";
+            return true;
+        } else {
+            echo "Unable to create user record";
+            die();
+        }
+        return true;
+    }
+
+    public static function truncate($table){
+        $pdo = ConnectionDB::getInstance()->getPdo();
+        $sqlStr = "TRUNCATE TABLE ". $table;
         $insertStatement = $pdo->prepare($sqlStr);
         if ($insertStatement->execute()) {
             echo "New data  added to DB successfully";

@@ -12,11 +12,73 @@ class DataController
 {
     public function actionPlacedOrder()
     {
-        echo "Вызван DataController->actionPlacedOrder<br>";
-        echo "POST:<br>";
-        var_dump($_POST);
+//        echo "Вызван DataController->actionPlacedOrder<br>";
+
+        $arrUserFromJSON = json_decode($_POST['cart'], true);
+        $arrUser = [];
+        ModelDB::truncate("receiver");
+        ModelDB::truncate("cart");
+
+
+        if ($_POST) {
+
+            $userLogged = SessionControl::getSession()['user']['id_user'];
+
+            $arrUser = array(
+                "id_user" => $userLogged,
+                "firstName" => $arrUserFromJSON["firstName"],
+                "lastName" => $arrUserFromJSON["lastName"],
+                "city" => $arrUserFromJSON["city"],
+                "address" => $arrUserFromJSON["address"],
+                "email" => $arrUserFromJSON["email"],
+                "phone" => $arrUserFromJSON["phone"]
+            );
+            $arrCartGoods = [];
+            $index = 0;
+
+            foreach ($arrUserFromJSON['cartGoods'] as $item) {
+                array_push($arrCartGoods, [
+                    "id_user" => $userLogged,
+                    'id_good' => $item['id_good'],
+                    'title' => $item['title'],
+                    'price' => $item['price'],
+                    'amount' => $item['amount']
+                ]);
+                ModelDB::writeStr('cart', $arrCartGoods[$index]);
+                $index++;
+            };
+            echo "--arrCartGoods--<br>";
+            dd($arrCartGoods);
+        }
+        echo "----<br>";
+        if ($_POST) {
+            ModelDB::writeStr('receiver', $arrUser);
+        }
+        $this->actionShowOrder();
+    }
+
+    public function actionShowOrder()
+    {
+//        echo "Вызван DataController->actionShowOrder<br>";
+
+
+        $userOrder = ModelDB::showTable("receiver")[0];
+        $userCart = ModelDB::showTable("cart");
+
+        date_default_timezone_set('Europe/Kiev');
+        $date = date('Y/m/d H:i:s');
+
+        $subject = " Order Cakes from website ". $_ENV['WEB_SITE']." ".$date;
+
+//        $res = (new MailerController())->sendEmail(
+//            $userOrder['email'],
+//            $subject,
+//            $content);
+
+        require_once(ROOT . '/App/View/order/placedOrder.html');
 
     }
+
 
     public function actionCart()
     {

@@ -28,5 +28,6 @@ return array(
 
     'cart' => ['data/cart'],
 
-    'placedOrder' => ['data/placedOrder']
+    'placedOrder' => ['data/placedOrder'],
+    'showOrder' => ['data/showOrder']
 );
