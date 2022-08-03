@@ -47,8 +47,6 @@
             </div>
         </div>
     <div id="app">
-
-
         <main>
 
             <cart-button
@@ -57,8 +55,8 @@
                     transform: scale(200%);
                     position: absolute">
             </cart-button>
-            <router-view ></router-view>
-            <products-list :data="<?php echo "test"?>" ></products-list>
+            <router-view :someProp=<?php echo "data"> ></router-view>
+            <products-list ></products-list>
             <cart-modal></cart-modal>
         </main>
     </div>

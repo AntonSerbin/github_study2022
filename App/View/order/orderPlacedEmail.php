@@ -1,6 +1,6 @@
 <!--<link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css" xmlns="http://www.w3.org/1999/html">-->
 <!--<link rel="stylesheet" href="/App/View/style/style.css">-->
-
+<?php
 <div id='app'>
     <main>
         <div style="margin: 40px">

@@ -1,8 +1,7 @@
+<header>
+    <link rel="stylesheet" href="/App/View/style/style.css">
+</header>
 <body>
-<style type="text/css" media="all">
-    <?php echo file_get_contents(ROOT.'/node_modules/bootstrap/dist/css/bootstrap.css'); ?>
-    <?php echo file_get_contents(ROOT.'/App/View/style/style.css'); ?>
-</style>
 <div class="indexWrapper">
 
     <header>

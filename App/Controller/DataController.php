@@ -70,10 +70,10 @@ class DataController
 
         $subject = " Order Cakes from website ". $_ENV['WEB_SITE']." ".$date;
 
-//        $res = (new MailerController())->sendEmail(
-//            $userOrder['email'],
-//            $subject,
-//            $content);
+        $res = (new MailerController())->sendEmail(
+            $userOrder['email'],
+            $subject,
+            "<h4>Thank you for your order. Within 24 hour you will have a call from our manager</h4>");
 
         require_once(ROOT . '/App/View/order/placedOrder.html');
 

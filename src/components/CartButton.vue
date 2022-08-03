@@ -6,10 +6,10 @@
     </svg>
     <span class="badge bg-success mx-2">{{ productsCount }}</span>
   </button>
+
 </template>
 
 <script>
-import CartModal from "./cart/CartModal";
 
 export default {
   name: "CartButton",
