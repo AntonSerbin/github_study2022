@@ -85,7 +85,7 @@ export default {
         method: "POST",
         body: formData
       })
-      location.replace("http://localhost/showOrder");
+      // location.replace("http://localhost/showOrder");
     },
 
   },

@@ -1,9 +1,6 @@
 <?php
 
-namespace Framework\frameworkJSON;
-
-use Framework\Session;
-use Framework\Database;
+namespace App\Service;
 
 class MakeJSON
 {

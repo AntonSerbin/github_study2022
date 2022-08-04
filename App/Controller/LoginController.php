@@ -2,8 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Service\Login;
 use Framework\Database\ModelDB;
-use App\Entity\Login;
 use Framework\Mail\MailerController;
 use Framework\Session\SessionControl;
 
@@ -11,8 +12,15 @@ class LoginController
 {
     public function actionShowUserForm()
     {
-        ModelDB::showTable('users');
-        require_once(ROOT . '/App/View/login/loginPage.php');
+        $user = new User();
+
+        dd($user->join("cart","users.id","cart.id_user")
+            ->join("goods","cart.id_good","goods.id")
+            ->join("order_goods","goods.id","order_goods.id_good")
+            ->where("users.id",10)
+            ->select());
+
+//        require_once(ROOT . '/App/View/login/loginPage.php');
         return true;
     }
 
@@ -25,16 +33,17 @@ class LoginController
 //            $psw = md5($_POST['psw']);
             $psw = $_POST['psw'];
             echo $psw . "<br>";
-            $res = Login::checkLogin($uName, $psw);
+            $loginService = new Login();
+            $res = $loginService->checkLogin($uName, $psw);
             echo "<br> res= ";
             print_r($res);
 
             if ($res) {
-                SessionControl::writeDataToSession('id_user', $res['id_user']);
+                SessionControl::writeDataToSession('id', $res['id']);
                 SessionControl::writeDataToSession('email', $res['email']);
                 SessionControl::writeDataToSession('login', $res['login']);
-                SessionControl::writeDataToSession('firstname', $res['firstName']);
-                SessionControl::writeDataToSession('secondname', $res['secondName']);
+                SessionControl::writeDataToSession('firstname', $res['firstname']);
+                SessionControl::writeDataToSession('secondname', $res['secondname']);
                 SessionControl::writeDataToSession('phone', $res['phone']);
 
                 require_once(ROOT . '/App/View/login/correctLogin.php');
@@ -75,7 +84,8 @@ class LoginController
             'secondName' => $_POST['secondName'],
             'phone' => $phone
         ];
-        $alreadyRegistered = ModelDB::read('users', "email", $dataUser['email']);
+        $user = new User();
+        $alreadyRegistered = $user->read("email", $dataUser['email']);
         print_r($alreadyRegistered);
         if ($alreadyRegistered) {
             require_once(ROOT . '/App/View/login/badRegistrationEmail.php');
@@ -100,7 +110,8 @@ class LoginController
     {
         echo "LoginController -> actionSendFormPassword<br>";
         $email = $_POST['email'];
-        $userArr = Login::checkEmail($email);
+        $loginService = new Login();
+        $userArr = $loginService->checkEmail($email);
         echo "<pre>";
         print_r($userArr);
         echo "<br>";
@@ -111,11 +122,13 @@ class LoginController
                          Please, follow this link to change password:<br>";
             $hash = crypt($email, rand());
             $hash = str_replace('/', '', $hash);
-            $content .= $_ENV['WEB_SITE']."modifyPassword/" . $hash;
+            $content .= $_ENV['WEB_SITE'] . "modifyPassword/" . $hash;
 //            $res = MailerController::sendEmail($email, 'new Password PHP_Project: ' . date("h:i:sa"), $content);
 //            $res = login::sendEmail($email, 'new Password PHP_Project: ' . date("h:i:sa"), $content);
 //            login::modifyUserInDb($userArr['id'], "hash", $hash);
-            ModelDB::update('users',"hash",$hash,'id_user',$userArr['id_user']);
+            $user = new User();
+
+            $user->update("hash", $hash, 'id', $userArr['id']);
             $res = (new MailerController())->sendEmail($email, 'new Password PHP_Project: ' . date("h:i:sa"), $content);
 
             if ($res) {
@@ -141,7 +154,8 @@ class LoginController
             $uriArr = explode("/", $_SERVER['REQUEST_URI']);
         };
         $hashLink = end($uriArr);
-        $userData = Login::checkHash($hashLink);
+        $loginService = new Login();
+        $userData = $loginService->checkHash($hashLink);
         if ($userData) {
             $_SESSION['changePasswordUser'] = $userData;
 
@@ -157,8 +171,10 @@ class LoginController
         echo "LoginController -> actionSaveNewPassword<br>";
 //        $newPassword = md5($_POST['psw']);
         $newPassword = $_POST['psw'];
-        $id = $_SESSION['changePasswordUser']['id_user'];
-        ModelDB::update('users','password',$newPassword,"id_user",$id);
+        $id = $_SESSION['changePasswordUser']['id'];
+        $user = new User();
+
+        $user->update('password', $newPassword, "id", $id);
         unset($_SESSION['changePasswordUser']);
         (new LoginController())->actionShowUserForm();
     }

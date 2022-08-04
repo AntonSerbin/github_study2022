@@ -3,38 +3,74 @@
 namespace Framework\Database;
 
 use Framework\Database\ConnectionDB;
+use Symfony\Component\Console\Helper\Table;
 use function Symfony\Component\String\s;
 
-//use controllers\LoginController;
-//use frameworkVendor\ConnectionDBUsers;
-//use PHPMailer\PHPMailer\Exception;
-//use PHPMailer\PHPMailer\PHPMailer;
-//use PHPMailer\PHPMailer\SMTP;
 
-class ModelDB
+abstract class ModelDB
 {
-    public static function showTable($name)
+    protected string $table;
+    private array $where;
+    private array $join;
+    private string $sqlStr = "";
+    private bool $whereAdded = false;
+
+    public function join($table2, $column1, $column2)
+    {
+
+        $this->sqlStr .= "INNER JOIN " . $table2 . " ON " . $column1 . "=" . $column2." ";
+
+        return $this;
+    }
+//SELECT Orders.OrderID, Customers.CustomerName, Shippers.ShipperName
+//FROM ((Orders
+//INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID)
+//INNER JOIN Shippers ON Orders.ShipperID = Shippers.ShipperID);
+
+    public function where($key, $value)
+    {
+        if (!$this->whereAdded) {
+            $this->sqlStr .= " WHERE " . $key . " = '" . $value . "'";
+        }
+        if ($this->whereAdded) {
+            $this->sqlStr .= " AND " . $key . " = '" . $value . "'";
+        }
+
+        $this->whereAdded = true;
+        return $this;
+    }
+
+    public function select($value = "*")
+    {
+        $pdo = ConnectionDB::getInstance()->getPdo();
+        $sqlStr = "SELECT " . $value . " FROM " . $this->table . " " . $this->sqlStr;
+        dd($sqlStr);
+        $elementsDB = $pdo->query($sqlStr)->fetchAll();
+        return $elementsDB;
+    }
+
+    public function showTable()
     {
         $pdo = ConnectionDB::getInstance()->getPdo();
 //        dd("select * from $name");
-        $elementsDB = $pdo->query("select * from $name")->fetchAll();
+        $elementsDB = $pdo->query("select * from $this->table")->fetchAll();
         return $elementsDB;
     }
 
-    public static function read($table, $column, $elem)
+    public function read($column, $elem)
     {
         $pdo = ConnectionDB::getInstance()->getPdo();
 //        dd("select * from $table where $column = '$elem';");
-        $elementsDB = $pdo->query("select * from $table where $column = '$elem';")->fetchAll();
+        $elementsDB = $pdo->query("select * from " . $this->table . " where $column = '$elem';")->fetchAll();
         return $elementsDB;
     }
 
-    public static function write($table, $column, $elem )
+    public function write($column, $elem)
     {
         $pdo = ConnectionDB::getInstance()->getPdo();
-        echo $table, $column, $elem . '<br>';
+//        echo $this->table, $column, $elem . '<br>';
 //        $sqlStr = "INSERT INTO '"."$table' ('"."$column') VALUE ('"."$elem');";
-        $sqlStr = "INSERT INTO ".$table." $column VALUES (" ."'" . $elem . "');";
+        $sqlStr = "INSERT INTO " . $this->table . " $column VALUES (" . "'" . $elem . "');";
 
         echo($sqlStr);
         $insertStatement = $pdo->prepare($sqlStr);
@@ -48,12 +84,31 @@ class ModelDB
         return true;
     }
 
-    public static function update($table, $column, $elem, $whereColumn, $whereElem)
+
+    public function find($column, $elem, $requestColumn)
+    {
+        $pdo = ConnectionDB::getInstance()->getPdo();
+        $sqlStr = "select " . $requestColumn . " from " . $this->table . " where $column ='" . $elem . "';";
+//        echo $sqlStr;
+        $elementsDB = $pdo->query($sqlStr)->fetchAll();
+        return $elementsDB;
+    }
+
+
+    public function readLastString()
+    {
+        $pdo = ConnectionDB::getInstance()->getPdo();
+        $sqlStr = "select * from $this->table ORDER BY ID DESC LIMIT 1";
+        $elementsDB = $pdo->query($sqlStr)->fetchAll();
+        return $elementsDB;
+    }
+
+
+    public function update($column, $elem, $whereColumn, $whereElem)
     {
         $pdo = ConnectionDB::getInstance()->getPdo();
 //        echo $table, $column, $elem , $whereColumn, $whereElem,'<br>';
-        $sqlStr = "UPDATE ".$table." SET $column = '".$elem."' WHERE ($whereColumn='".$whereElem."');";
-        echo($sqlStr);
+        $sqlStr = "UPDATE " . $this->table . " SET $column = '" . $elem . "' WHERE ($whereColumn='" . $whereElem . "');";
         $insertStatement = $pdo->prepare($sqlStr);
         if ($insertStatement->execute()) {
             echo "New data  added to DB successfully";
@@ -65,35 +120,48 @@ class ModelDB
         return true;
     }
 
-    public static function truncate($table){
-        $pdo = ConnectionDB::getInstance()->getPdo();
-        $sqlStr = "TRUNCATE TABLE ". $table;
-        $insertStatement = $pdo->prepare($sqlStr);
-        if ($insertStatement->execute()) {
-            echo "New data  added to DB successfully";
-            return true;
-        } else {
-            echo "Unable to create user record";
-            die();
-        }
-        return true;
-    }
-
-
-    public static function writeStr($table, $arr)
+    public function truncate()
     {
         $pdo = ConnectionDB::getInstance()->getPdo();
-        echo '<br>';
+        $sqlStr = "TRUNCATE TABLE " . $this->table;
+        $insertStatement = $pdo->prepare($sqlStr);
+        if ($insertStatement->execute()) {
+            echo "Table truncated ";
+            return true;
+        } else {
+            echo "Unable to create user record";
+            die();
+        }
+        return true;
+    }
 
-        $sqlStr = "INSERT INTO $table (";
+    public function delete($column, $el)
+    {
+        $pdo = ConnectionDB::getInstance()->getPdo();
+        $sqlStr = "TRUNCATE TABLE " . $this->table;
+        $insertStatement = $pdo->prepare($sqlStr);
+        if ($insertStatement->execute()) {
+            echo "Table truncated ";
+            return true;
+        } else {
+            echo "Unable to create user record";
+            die();
+        }
+        return true;
+    }
+
+    public function writeStr($arr)
+    {
+        $pdo = ConnectionDB::getInstance()->getPdo();
+        $sqlStr = "INSERT INTO $this->table (";
         foreach ($arr as $key => $value) {
-            $sqlStr .= "$key".", ";
+            $sqlStr .= "$key" . ", ";
         };
-        $sqlStr = substr($sqlStr, 0, -2). ") VALUES (";
+        $sqlStr = substr($sqlStr, 0, -2) . ") VALUES (";
         foreach ($arr as $key => $value) {
             $sqlStr .= "'$value" . "',";
         };
-        $sqlStr= substr($sqlStr, 0, -1).");";
+        $sqlStr = substr($sqlStr, 0, -1) . ");";
         echo $sqlStr;
 
         $insertStatement = $pdo->prepare($sqlStr);

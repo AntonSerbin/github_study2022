@@ -1,25 +1,25 @@
 <?php
 
-namespace App\Entity;
+namespace App\Service;
 
+use App\Entity\User;
 use Framework\Database\ConnectionDB;
 use Framework\Database\ModelDB;
-use frameworkVendor\ConnectionDBUsers;
 
 //use controllers\LoginController;
 //use frameworkVendor\ConnectionDB;
-//use PHPMailer\PHPMailer\Exception;
-//use PHPMailer\PHPMailer\PHPMailer;
-//use PHPMailer\PHPMailer\SMTP;
+
 
 class Login
 {
-    public static function checkLogin($name, $password)
+
+    public function checkLogin($name, $password)
     {
 
         echo "LoginModel -> запустили checkLogin<br>";
 
-        $elementsDB = ModelDB::showTable("users");
+        $user = new User();
+        $elementsDB = $user->showTable();
 
         foreach ($elementsDB as $user) {
             if ($user['login'] == $name && $user['password'] == $password) {
@@ -30,10 +30,11 @@ class Login
         return false;
     }
 
-    public static function checkEmail($email)
+    public function checkEmail($email)
     {
         echo "Entity->Login-> checkEmail<br>";
-        $elementsDB = ModelDB::read('users', "email", $email);
+        $user = new User();
+        $elementsDB = $user->read("email", $email);
 //      $str = "select * from users WHERE email='$email'";
         if ($elementsDB) {
             return $elementsDB[0];
@@ -48,71 +49,25 @@ class Login
      * @return true [array of values in string in DB] / false if there is no such email
      */
 
-    public static function checkHash($hash)
+    public function checkHash($hash)
     {
 //        $pdo = ConnectionDB::getInstance()->getPdo();
 //        $str = "select * from users WHERE hash='$hash'";
-        $elementsDB = ModelDB::read('users',"hash",$hash);
+        $user = new User();
+        $elementsDB = $user->read("hash",$hash);
 //        $elementsDB = $pdo->query($str)->fetch();
         return $elementsDB[0];
     }
 
-    public static function sendEmail($email, $subject, $content)
+    public function readDataConnectionById($id)
     {
-//        require(ROOT . '/PHPMailer/src/Exception.php');
-//        require(ROOT . '/PHPMailer/src/PHPMailer.php');
-//        require(ROOT . '/PHPMailer/src/SMTP.php');
-//
-//        $smtpData = require(ROOT . '/config/emailSMTP_cnfg.php');
-//        $smtpHost = $smtpData['smtpHost'];
-//        $smtpUsername = $smtpData['smtpUsername'];
-//        $smtpPassword = $smtpData['smtpPassword'];
-//        $smtpPort = $smtpData['smtpPort'];
-//        $setFromName = $smtpData['setFromName'];
-//
-//        $mail = new PHPMailer(true);
-//
-//        try {
-//            //Server settings
-//            $mail->SMTPDebug = SMTP::DEBUG_SERVER;             //Enable verbose debug output
-//            $mail->isSMTP();                                   //Send using SMTP
-//            $mail->Host = $smtpHost;              //Set the SMTP server to send through
-//            $mail->SMTPAuth = true;                            //Enable SMTP authentication
-//            $mail->Username = $smtpUsername;                  //SMTP username
-//            $mail->Password = $smtpPassword;              //SMTP password!! NOT EMAIL!!
-//            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;   //Enable implicit TLS encryption
-//            $mail->Port = $smtpPort;                                 //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-//
-//            //Recipients
-//            $mail->setFrom($email, $setFromName);
-//            $mail->addAddress($email);     //Add a recipient
-//
-//            //Content
-//            $mail->isHTML(true);                 //Set email format to HTML
-//            $mail->Subject = $subject;
-//            $mail->Body = $content;
-//
-//            $mail->send();
-//
-//            echo 'Mail has been sent<br>';
-//            return true;
-//        } catch
-//        (Exception $e) {
-//            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo} <br>";
-//            return false;
-//        }
-    }
-
-    public static function readDataConnectionById($id)
-    {
-
         $pdo = ConnectionDB::getInstance()->getPdo();
         $sqlStr = "select * from dbconnect where iduser=$id";
         $elementsDB = $pdo->query($sqlStr)->fetchAll();
         return $elementsDB;
     }
 
-    public static function deleteDataConnectionById($id)
+    public function deleteDataConnectionById($id)
     {
         $pdo = ConnectionDB::getInstance()->getPdo();
         $sqlStr = "delete from dbconnect where iduser=$id";
@@ -131,8 +86,8 @@ class Login
         echo "models->addUserIntoDb<br>";
         print_r($userData);
         echo "models->addUserIntoDb END<br><br>";
-
-        ModelDB::writeStr("users", $userData);
+        $user = new User();
+        $user->writeStr($userData);
     }
 
     public static function modifyUserInDb($idUser, $nameOfColumn, $newVolume)
@@ -154,7 +109,7 @@ class Login
     }
 
 
-    public static function writeUserSettingDb($userId, $DBHost, $DBName, $DBUser, $DBPwd, $DBTable, $DBColumn)
+    public function writeUserSettingDb($userId, $DBHost, $DBName, $DBUser, $DBPwd, $DBTable, $DBColumn)
     {
         $sqlStr = "INSERT INTO dbconnect VALUES ( $userId, " .
             "'" . $DBHost . "', " .

@@ -2,19 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c574fcc-f74e-44f2-8ef8-d15cc9e11da8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/App/View/cart/cart.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Entity/Cart.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Entity/Goods.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Entity/Order_goods.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Entity/Orders.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Entity/Receiver.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Entity/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.php-cs-fixer.cache" beforeDir="false" afterPath="$PROJECT_DIR$/.php-cs-fixer.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Controller/DataController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/DataController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/View/cart/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/App/View/cart/cart.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/View/login/loginPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/View/login/loginPage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/View/order/orderPlacedEmail.html" beforeDir="false" afterPath="$PROJECT_DIR$/App/View/order/orderPlacedEmail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Controller/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Controller/MakeJSONController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/MakeJSONController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Entity/Login.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Service/Login.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/View/order/placedOrder.html" beforeDir="false" afterPath="$PROJECT_DIR$/App/View/order/placedOrder.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Framework/Database/ModelDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/Database/ModelDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Framework/frameworkJSON/MakeJSON.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Service/MakeJSON.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/monolog.log" beforeDir="false" afterPath="$PROJECT_DIR$/monolog.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/CartButton.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CartButton.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/cart/CartBillingForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/cart/CartBillingForm.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/NavHeader.vue" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,30 +100,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/antons/Desktop/php_nix/App/View/cart&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/snap/phpstorm/284/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/home/antons/Desktop/php_nix/App/Entity",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "ts.external.directory.path": "/snap/phpstorm/284/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/App/Entity" />
       <recent name="$PROJECT_DIR$/App/View/cart" />
       <recent name="$PROJECT_DIR$/src/components" />
       <recent name="$PROJECT_DIR$/src/components/header" />
       <recent name="$PROJECT_DIR$/src" />
-      <recent name="$PROJECT_DIR$/tmp/vue3-edu-store-master/src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src" />
@@ -186,6 +191,7 @@
       <workItem from="1659516554097" duration="3723000" />
       <workItem from="1659520304263" duration="12480000" />
       <workItem from="1659544736617" duration="3221000" />
+      <workItem from="1659602875164" duration="30071000" />
     </task>
     <servers />
   </component>
