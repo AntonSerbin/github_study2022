@@ -3,6 +3,7 @@
 namespace Framework\Database;
 
 use Framework\Database\ConnectionDB;
+use JetBrains\PhpStorm\NoReturn;
 use Symfony\Component\Console\Helper\Table;
 use function Symfony\Component\String\s;
 
@@ -10,22 +11,52 @@ use function Symfony\Component\String\s;
 abstract class ModelDB
 {
     protected string $table;
-    private array $where;
-    private array $join;
     private string $sqlStr = "";
     private bool $whereAdded = false;
+    private $pdo;
+
+    public function __construct()
+    {
+        $this->pdo = ConnectionDB::getInstance()->getPdo();
+    }
+
+
+   public function save()
+    {
+        $fields = $this->getFields();
+        $strFields = "";
+        $strValues = ") VALUES(";
+        $sqlStr = "INSERT INTO " . $this->table . "(";
+        foreach ($fields as $key => $value) {
+            if (!isset($this->$key)) {
+                continue;
+            }
+            $strFields .= $key . ",";
+            $strValues .= "'".$this->$key . "',";
+        };
+        $strFields = rtrim($strFields, ",");
+        $strValues = rtrim($strValues, ",");
+
+        $sqlStr .= $strFields . $strValues . ");";
+        $insertStatement = $this->pdo->prepare($sqlStr);
+        if ($insertStatement->execute()
+        ) {
+//            echo "New data  added to DB successfully";
+            $this->id = $this->pdo->lastInsertId();
+            return $this;
+        } else {
+//            echo "Unable to create user record";
+        }
+        return true;
+    }
 
     public function join($table2, $column1, $column2)
     {
 
-        $this->sqlStr .= "INNER JOIN " . $table2 . " ON " . $column1 . "=" . $column2." ";
+        $this->sqlStr .= "INNER JOIN " . $table2 . " ON " . $column1 . "=" . $column2 . " ";
 
         return $this;
     }
-//SELECT Orders.OrderID, Customers.CustomerName, Shippers.ShipperName
-//FROM ((Orders
-//INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID)
-//INNER JOIN Shippers ON Orders.ShipperID = Shippers.ShipperID);
 
     public function where($key, $value)
     {
@@ -44,8 +75,8 @@ abstract class ModelDB
     {
         $pdo = ConnectionDB::getInstance()->getPdo();
         $sqlStr = "SELECT " . $value . " FROM " . $this->table . " " . $this->sqlStr;
-        dd($sqlStr);
         $elementsDB = $pdo->query($sqlStr)->fetchAll();
+        $this->sqlStr = "";
         return $elementsDB;
     }
 
@@ -54,6 +85,7 @@ abstract class ModelDB
         $pdo = ConnectionDB::getInstance()->getPdo();
 //        dd("select * from $name");
         $elementsDB = $pdo->query("select * from $this->table")->fetchAll();
+
         return $elementsDB;
     }
 
@@ -72,14 +104,13 @@ abstract class ModelDB
 //        $sqlStr = "INSERT INTO '"."$table' ('"."$column') VALUE ('"."$elem');";
         $sqlStr = "INSERT INTO " . $this->table . " $column VALUES (" . "'" . $elem . "');";
 
-        echo($sqlStr);
         $insertStatement = $pdo->prepare($sqlStr);
         if ($insertStatement->execute()) {
-            echo "New data  added to DB successfully";
+//            echo "New data  added to DB successfully";
             return true;
         } else {
-            echo "Unable to create user record";
-            die();
+//            echo "Unable to create user record";
+//            die();
         }
         return true;
     }
@@ -88,8 +119,7 @@ abstract class ModelDB
     public function find($column, $elem, $requestColumn)
     {
         $pdo = ConnectionDB::getInstance()->getPdo();
-        $sqlStr = "select " . $requestColumn . " from " . $this->table . " where $column ='" . $elem . "';";
-//        echo $sqlStr;
+        $sqlStr = "select " . $column . " from " . $this->table . " where $elem ='" . $requestColumn . "';";
         $elementsDB = $pdo->query($sqlStr)->fetchAll();
         return $elementsDB;
     }
@@ -111,11 +141,11 @@ abstract class ModelDB
         $sqlStr = "UPDATE " . $this->table . " SET $column = '" . $elem . "' WHERE ($whereColumn='" . $whereElem . "');";
         $insertStatement = $pdo->prepare($sqlStr);
         if ($insertStatement->execute()) {
-            echo "New data  added to DB successfully";
+//            echo "New data  added to DB successfully";
             return true;
         } else {
-            echo "Unable to create user record";
-            die();
+//            echo "Unable to create user record";
+//            die();
         }
         return true;
     }
@@ -126,10 +156,10 @@ abstract class ModelDB
         $sqlStr = "TRUNCATE TABLE " . $this->table;
         $insertStatement = $pdo->prepare($sqlStr);
         if ($insertStatement->execute()) {
-            echo "Table truncated ";
+//            echo "Table truncated ";
             return true;
         } else {
-            echo "Unable to create user record";
+//            echo "Unable to create user record";
             die();
         }
         return true;
@@ -141,10 +171,10 @@ abstract class ModelDB
         $sqlStr = "TRUNCATE TABLE " . $this->table;
         $insertStatement = $pdo->prepare($sqlStr);
         if ($insertStatement->execute()) {
-            echo "Table truncated ";
+//            echo "Table truncated ";
             return true;
         } else {
-            echo "Unable to create user record";
+//            echo "Unable to create user record";
             die();
         }
         return true;
@@ -162,169 +192,28 @@ abstract class ModelDB
             $sqlStr .= "'$value" . "',";
         };
         $sqlStr = substr($sqlStr, 0, -1) . ");";
-        echo $sqlStr;
 
         $insertStatement = $pdo->prepare($sqlStr);
         if ($insertStatement->execute()) {
-            echo "New data  added to DB successfully";
+//            echo "New data  added to DB successfully";
             return true;
         } else {
-            echo "Unable to create user record";
-            die();
+//            echo "Unable to create user record";
+//            die();
         }
         return true;
     }
 
-//    /**
-//     * @param $email - email to check Data Base
-//     * @return true [array of values in string in DB] / false if there is no such email
-//     */
-//    public static function checkEmail($email)
-//    {
-//        $pdo = ConnectionDBUsers::getInstance()->getPdo();
-//        $str = "select * from users WHERE email='$email'";
-//        $elementsDB = $pdo->query($str)->fetch();
-//        return $elementsDB;
-//    }
-//
-//    public static function checkHash($hash)
-//    {
-//        $pdo = ConnectionDBUsers::getInstance()->getPdo();
-//        $str = "select * from users WHERE hash='$hash'";
-//        $elementsDB = $pdo->query($str)->fetch();
-//        return $elementsDB;
-//    }
-//
-//    public static function sendEmail($email, $subject, $content)
-//    {
-//        require(ROOT . '/PHPMailer/src/Exception.php');
-//        require(ROOT . '/PHPMailer/src/PHPMailer.php');
-//        require(ROOT . '/PHPMailer/src/SMTP.php');
-//
-//        $smtpData = require(ROOT . '/config/emailSMTP_cnfg.php');
-//        $smtpHost = $smtpData['smtpHost'];
-//        $smtpUsername = $smtpData['smtpUsername'];
-//        $smtpPassword = $smtpData['smtpPassword'];
-//        $smtpPort = $smtpData['smtpPort'];
-//        $setFromName = $smtpData['setFromName'];
-//
-//        $mail = new PHPMailer(true);
-//
-//        try {
-//            //Server settings
-//            $mail->SMTPDebug = SMTP::DEBUG_SERVER;             //Enable verbose debug output
-//            $mail->isSMTP();                                   //Send using SMTP
-//            $mail->Host = $smtpHost;              //Set the SMTP server to send through
-//            $mail->SMTPAuth = true;                            //Enable SMTP authentication
-//            $mail->Username = $smtpUsername;                  //SMTP username
-//            $mail->Password = $smtpPassword;              //SMTP password!! NOT EMAIL!!
-//            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;   //Enable implicit TLS encryption
-//            $mail->Port = $smtpPort;                                 //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-//
-//            //Recipients
-//            $mail->setFrom($email, $setFromName);
-//            $mail->addAddress($email);     //Add a recipient
-//
-//            //Content
-//            $mail->isHTML(true);                 //Set email format to HTML
-//            $mail->Subject = $subject;
-//            $mail->Body = $content;
-//
-//            $mail->send();
-//
-//            echo 'Mail has been sent<br>';
-//            return true;
-//        } catch
-//        (Exception $e) {
-//            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo} <br>";
-//            return false;
-//        }
-//    }
-//
-//    public static function readDataConnectionById($id)
-//    {
-//
-//        $pdo = ConnectionDBUsers::getInstance()->getPdo();
-//        $sqlStr = "select * from dbconnect where iduser=$id";
-//        $elementsDB = $pdo->query($sqlStr)->fetchAll();
-//        return $elementsDB;
-//    }
-//
-//    public static function deleteDataConnectionById($id)
-//    {
-//        $pdo = ConnectionDBUsers::getInstance()->getPdo();
-//        $sqlStr = "delete from dbconnect where iduser=$id";
-//        $insertStatement = $pdo->prepare($sqlStr);
-//        if ($insertStatement->execute()) {
-//            echo "Record has been deleted successfully";
-//        } else {
-//            echo "Unable to delete record";
-//            die();
-//        }
-//        return true;
-//    }
-//
-//    public static function addUserIntoDb($userData)
-//    {
-//        echo "models->addUserIntoDb<br>";
-//        $credentials = require(ROOT . '/config/dbLogin_cnfg.php');
-//
-//        $columnLogin = $credentials['columnUser'];
-//        $columnPassword = $credentials['columnPassword'];
-//        $columnEmail = $credentials['columnEmail'];
-//        $pdo = ConnectionDBUsers::getInstance()->getPdo();
-//        $sqlStr = "INSERT INTO users ($columnLogin,$columnPassword,$columnEmail) VALUES (" .
-//            "'" . $userData['login'] . "', " .
-//            "'" . $userData['psw'] . "', " .
-//            "'" . $userData['email'] . "');";
-//        $insertStatement = $pdo->prepare($sqlStr);
-//        if ($insertStatement->execute()) {
-//            echo "New user " . $userData['login'] . " created successfully";
-//            return true;
-//        } else {
-//            echo "Unable to create user record";
-//            die();
-//        }
-//    }
-//
-//    public static function modifyUserInDb($idUser, $nameOfColumn, $newVolume)
-//    {
-//        echo "models->modifyUserIntoDb<br>";
-//
-//        $pdo = ConnectionDBUsers::getInstance()->getPdo();
-//
-//        $sqlStr = "UPDATE users SET $nameOfColumn = '$newVolume' WHERE id = '$idUser'";
-//
-//        $insertStatement = $pdo->prepare($sqlStr);
-//        if ($insertStatement->execute()) {
-//            echo "Modified $nameOfColumn from User ID $idUser to $newVolume<br>";
-//            return true;
-//        } else {
-//            echo "Unable to modify user record";
-//            return false;
-//        }
-//    }
-//
-//
-//    public static function writeUserSettingDb($userId, $DBHost, $DBName, $DBUser, $DBPwd, $DBTable, $DBColumn)
-//    {
-//        $sqlStr = "INSERT INTO dbconnect VALUES ( $userId, " .
-//            "'" . $DBHost . "', " .
-//            "'" . $DBName . "', " .
-//            "'" . $DBUser . "', " .
-//            "'" . $DBPwd . "', " .
-//            "'" . $DBTable . "', " .
-//            "'" . $DBColumn . "' " .
-//            ");";
-//        $pdo = ConnectionDBUsers::getInstance()->getPdo();
-//        $insertStatement = $pdo->prepare($sqlStr);
-//        if ($insertStatement->execute()) {
-//            echo "New record created successfully";
-//            unset($sqlStr);
-//            return true;
-//        } else {
-//            echo "Unable to create record";
-//            die();
-//        }
-//    }
+    public function getFields(): array
+    {
+        $notDBFields = array_keys(get_class_vars(__CLASS__));
+        return array_filter(get_class_vars(get_called_class()), function ($key) use ($notDBFields) {
+            if (!in_array($key, $notDBFields)) {
+                return true;
+            }
+        }, ARRAY_FILTER_USE_KEY);
+        die();
+
+    }
+
 }

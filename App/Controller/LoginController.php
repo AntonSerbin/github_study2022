@@ -14,13 +14,23 @@ class LoginController
     {
         $user = new User();
 
-        dd($user->join("cart","users.id","cart.id_user")
-            ->join("goods","cart.id_good","goods.id")
-            ->join("order_goods","goods.id","order_goods.id_good")
-            ->where("users.id",10)
-            ->select());
+//        $user->login="antontest";
+//        $user->email="antonTest@ga,c";
+//        $user->password="212";
+////        $user->firstname="dsfds";
+////        $user->secondname="sdfsdsssdf";
+//        $user->phone="0";
+//        $user->hash="";
+//
+//        $user->save();
 
-//        require_once(ROOT . '/App/View/login/loginPage.php');
+//        dd($user->join("cart","users.id","cart.id_user")
+//            ->join("goods","cart.id_good","goods.id")
+//            ->join("order_goods","goods.id","order_goods.id_good")
+//            ->where("users.id",10)
+//            ->select());
+
+        require_once(ROOT . '/App/View/login/loginPage.php');
         return true;
     }
 

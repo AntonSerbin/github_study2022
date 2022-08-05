@@ -29,5 +29,5 @@ return array(
     'cart' => ['data/cart'],
 
     'placedOrder' => ['data/placedOrder'],
-    'showOrder' => ['data/showOrder']
+    'showOrder/:id' => ['data/showOrder']
 );

@@ -31,7 +31,6 @@ class MailerController
 
         try {
             $mailer->send($email);
-            echo "<br> sent good. <br>";
             return true;
         } catch (TransportExceptionInterface $e) {
             echo "error!!<br> $e";

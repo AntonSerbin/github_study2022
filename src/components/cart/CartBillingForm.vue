@@ -81,11 +81,13 @@ export default {
       let formData = new FormData();
       formData.append('cart', JSON.stringify(cartInfo));
 
-      await fetch('http://localhost/placedOrder', {
+      const response = await fetch('http://localhost/placedOrder', {
         method: "POST",
         body: formData
-      })
-      // location.replace("http://localhost/showOrder");
+      });
+      const json = await response.json();
+      console.log("K=JSON sdf;dshf");
+      location.replace(`http://localhost/showOrder/${json.orderId}`);
     },
 
   },
