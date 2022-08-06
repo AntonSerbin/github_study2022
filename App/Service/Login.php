@@ -54,8 +54,7 @@ class Login
 //        $pdo = ConnectionDB::getInstance()->getPdo();
 //        $str = "select * from users WHERE hash='$hash'";
         $user = new User();
-        $elementsDB = $user->read("hash",$hash);
-//        $elementsDB = $pdo->query($str)->fetch();
+        $elementsDB = $user->where("hash", $hash)->select();
         return $elementsDB[0];
     }
 

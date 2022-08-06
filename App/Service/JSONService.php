@@ -2,10 +2,10 @@
 
 namespace App\Service;
 
-class MakeJSON
+class JSONService
 {
     public static function arrToJSON($param)
     {
-        echo json_encode($param);
+        return json_encode($param);
     }
 }

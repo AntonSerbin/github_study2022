@@ -17,7 +17,13 @@ class DataController
     {
         $arrUserFromJSON = json_decode($_POST['cart'], true);
 
-        if ($arrUserFromJSON && $_SESSION['user']) {
+        if (!isset($_SESSION['user'])) {
+            echo json_encode(["error" => "Unauthorized"]);
+            die();
+            return;
+        }
+
+        if ($arrUserFromJSON && isset($_SESSION['user'])) {
             $userId = SessionControl::getSession()['user']['id'];
 
             $orders = new Orders();
@@ -58,8 +64,6 @@ class DataController
 
     public function actionShowOrder($params)
     {
-//        echo "Вызван DataController->actionShowOrder<br>";
-
         $id = $params['id'];
         $order = new Orders();
 
@@ -68,12 +72,8 @@ class DataController
             ->join("receiver", "orders.id", "receiver.id_order")
             ->where("orders.id", $id)
             ->select();
-
         require_once(ROOT . '/App/View/order/placedOrder.html');
-
-        die();
     }
-
 
     public function actionCart()
     {

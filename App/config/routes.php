@@ -8,19 +8,14 @@ return array(
     'addNewUser' => ['login/addNewUser'],
     'resetLoginForm' => ['login/restoreFormPassword'],
     'data' => ['data/showData', ['checkAuth']], //DataController -> actionShowData
-    'addStringToDb' => ['data/addStringToDb', ['checkAuth']], //DataController -> actionAddStringToDb
-    'enterSettingsDb' => ['login/enterSettingDb', ['checkAuth']], // DataController -> actionEnterSettingDb
-    'writeSettingsDb' => ['login/writeSettingDb', ['checkAuth']], // LoginController -> actionWriteSettingDb
-    'addNewFile' => ['login/importFile', ['checkAuth']], // LoginController -> actionImportFile
-    'copyFileToBackend' => ['login/copyFileToBackend', ['checkAuth']], //LoginController -> actioncopyFileToBackend
-    'addStringToFile' => ['file/addStringToFile', ['checkAuth']], //FileController -> actionAddStringToFile
     'logout' => ['login/logout'], //LoginController -> actionLogout
 
     'sendEmailRestore' => ['login/sendFormPassword'],
-    'modifyPassword' => ['login/rewritePasswordFromEmail'],
+//    'modifyPassword' => ['login/rewritePasswordFromEmail'],
+    'modifyPassword/:hash' => ['login/rewritePasswordFromEmail'],
     'saveNewPassword' => ['login/saveNewPassword'],
 
-    'makeJSON/:request' => ['makeJSON/showJSON'],
+    'api/goods/:category' => ['goodsAPI/getGoods'],
 
     'goods/:category' => ['data/showPageGoods'],
     'requestDataPage' => ['data/requestDataGoods'],

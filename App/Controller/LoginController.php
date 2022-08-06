@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Service\Login;
-use Framework\Database\ModelDB;
 use Framework\Mail\MailerController;
 use Framework\Session\SessionControl;
 
@@ -13,23 +12,6 @@ class LoginController
     public function actionShowUserForm()
     {
         $user = new User();
-
-//        $user->login="antontest";
-//        $user->email="antonTest@ga,c";
-//        $user->password="212";
-////        $user->firstname="dsfds";
-////        $user->secondname="sdfsdsssdf";
-//        $user->phone="0";
-//        $user->hash="";
-//
-//        $user->save();
-
-//        dd($user->join("cart","users.id","cart.id_user")
-//            ->join("goods","cart.id_good","goods.id")
-//            ->join("order_goods","goods.id","order_goods.id_good")
-//            ->where("users.id",10)
-//            ->select());
-
         require_once(ROOT . '/App/View/login/loginPage.php');
         return true;
     }
@@ -40,13 +22,11 @@ class LoginController
         $postData = ($_POST) ? true : false;
         if ($postData) {
             $uName = $_POST['uName'];
-//            $psw = md5($_POST['psw']);
-            $psw = $_POST['psw'];
+            $psw = md5($_POST['psw']);
+//            $psw = $_POST['psw'];
             echo $psw . "<br>";
             $loginService = new Login();
             $res = $loginService->checkLogin($uName, $psw);
-            echo "<br> res= ";
-            print_r($res);
 
             if ($res) {
                 SessionControl::writeDataToSession('id', $res['id']);
@@ -88,8 +68,8 @@ class LoginController
         $dataUser = [
             'login' => $_POST['login'],
             'email' => $_POST['email'],
-            'password' => $_POST['psw'],
-//            'password' => md5($_POST['psw']),
+//            'password' => $_POST['psw'],
+            'password' => md5($_POST['psw']),
             'firstName' => $_POST['firstName'],
             'secondName' => $_POST['secondName'],
             'phone' => $phone
@@ -118,13 +98,10 @@ class LoginController
      */
     public function actionSendFormPassword()
     {
-        echo "LoginController -> actionSendFormPassword<br>";
         $email = $_POST['email'];
         $loginService = new Login();
         $userArr = $loginService->checkEmail($email);
-        echo "<pre>";
-        print_r($userArr);
-        echo "<br>";
+
         if ($userArr) {
             $userN = $userArr['login'];
             $content = "Dear $userN,<br> 
@@ -132,10 +109,12 @@ class LoginController
                          Please, follow this link to change password:<br>";
             $hash = crypt($email, rand());
             $hash = str_replace('/', '', $hash);
-            $content .= $_ENV['WEB_SITE'] . "modifyPassword/" . $hash;
+            $content .= $_ENV['WEB_SITE'] . "modifyPassword/" . $hash . "     |       ";
+            $content .=  "http://localhost/modifyPassword/" . $hash . "</br>";
+
 //            $res = MailerController::sendEmail($email, 'new Password PHP_Project: ' . date("h:i:sa"), $content);
 //            $res = login::sendEmail($email, 'new Password PHP_Project: ' . date("h:i:sa"), $content);
-//            login::modifyUserInDb($userArr['id'], "hash", $hash);
+            login::modifyUserInDb($userArr['id'], "hash", $hash);
             $user = new User();
 
             $user->update("hash", $hash, 'id', $userArr['id']);
@@ -157,14 +136,17 @@ class LoginController
 
     }
 
-    public function actionRewritePasswordFromEmail()
+    public function actionRewritePasswordFromEmail($params)
     {
         echo "LoginController -> actionRewritePasswordFromEmail<br>";
-        if (!empty($_SERVER['REQUEST_URI'])) {
-            $uriArr = explode("/", $_SERVER['REQUEST_URI']);
-        };
-        $hashLink = end($uriArr);
+//        die();
+//        if (!empty($_SERVER['REQUEST_URI'])) {
+//            $uriArr = explode("/", $_SERVER['REQUEST_URI']);
+//        };
+        $hashLink = $params['hash'];
         $loginService = new Login();
+        dd($hashLink);
+        dd($_SESSION);
         $userData = $loginService->checkHash($hashLink);
         if ($userData) {
             $_SESSION['changePasswordUser'] = $userData;
@@ -172,15 +154,15 @@ class LoginController
             require_once(ROOT . "/App/View/login/enterNewPasswordForm.php");
         } else {
             echo "Wrong hash link";
-            (new LoginController())->actionShowUserForm();
+//            (new LoginController())->actionShowUserForm();
         }
     }
 
     public function actionSaveNewPassword()
     {
         echo "LoginController -> actionSaveNewPassword<br>";
-//        $newPassword = md5($_POST['psw']);
-        $newPassword = $_POST['psw'];
+        $newPassword = md5($_POST['psw']);
+//        $newPassword = $_POST['psw'];
         $id = $_SESSION['changePasswordUser']['id'];
         $user = new User();
 

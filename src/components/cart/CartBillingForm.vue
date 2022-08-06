@@ -1,6 +1,6 @@
 <template>
   <!--  action="/placedOrder"  @submit.prevent="showData" action="/placedOrder" -->
-  <form method="POST" class="row g-3 mb-3" novalidate  @submit.prevent="showData">
+  <form method="POST" class="row g-3 mb-3" novalidate @submit.prevent="showData">
     <h5>Billing details</h5>
     <div class="col-md-6">
       <label for="firstName" class="form-label">First Name</label>
@@ -31,7 +31,7 @@
       <input v-model="phone" type="text" class="form-control" id="phone" placeholder="+38(099) 999-99-99">
     </div>
     <div class="col-12 d-flex justify-content-end">
-      <button :disabled="isPlaceOrderDisabled" class="btn btn-success"  >
+      <button :disabled="isPlaceOrderDisabled" class="btn btn-success">
         <!--        -->
         Place Order
       </button>
@@ -67,7 +67,7 @@ export default {
   },
   methods: {
 
-    showData:  async function sync() {
+    showData: async function sync() {
       let cartInfo = {
         "firstName": this.firstName,
         "lastName": this.lastName,
@@ -86,8 +86,13 @@ export default {
         body: formData
       });
       const json = await response.json();
-      console.log("K=JSON sdf;dshf");
-      location.replace(`http://localhost/showOrder/${json.orderId}`);
+      console.log(json);
+      if (json.error === "Unauthorized") {
+        alert(json.error);
+        location.replace(`http://localhost/login`);
+      } else {
+        location.replace(`http://localhost/showOrder/${json.orderId}`);
+      }
     },
 
   },

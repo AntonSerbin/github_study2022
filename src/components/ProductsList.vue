@@ -36,7 +36,7 @@ export default {
   methods: {
     async fetchProducts() {
       try {
-        const response = await fetch("http://localhost/makeJSON/goods=category=all");
+        const response = await fetch("http://localhost/api/goods/all");
         console.log("response Vue ProductList");
         console.log(response);
         this.products = await response.json();

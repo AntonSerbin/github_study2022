@@ -16,6 +16,9 @@ class MailService
         $res = (new MailerController())->sendEmail(
             $email,
             $subject,
-            $dataJson);
+            "test"
+//            require_once(ROOT . '/App/View/order/orderPlacedEmail.php')
+    );
     }
 }
+

@@ -42,8 +42,6 @@ export default {
   components: { CartProductItem },
   computed: {
     cartProducts() {
-      console.log("cartProducts comp");
-      console.log(this.$root.cartProducts);
       return this.$root.cartProducts;
     },
     totalAmount() {

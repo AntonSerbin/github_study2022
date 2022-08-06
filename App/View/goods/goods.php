@@ -2,9 +2,9 @@
     const fillInHTMLItems = async () => {
         let url = document.URL;
         index = url.lastIndexOf("goods/");
-        params = url.slice(index).replace("goods/","");
+        params = url.slice(index).replace("goods/", "");
         console.log(params);
-        requestStr = `http://localhost/makeJSON/goods=${params}`;
+        requestStr = `http://localhost/api/goods/${params}`;
         const response = await fetch(requestStr);
         console.log(response);
         const json = await response.json();
@@ -44,45 +44,13 @@
     }
     fillInHTMLItems();
 </script>
-<!--<head>-->
-<!--    <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">-->
-<!--</head>-->
+    <link href="/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="/App/View/style/style.css" rel="stylesheet">
 <body>
-<style type="text/css" media="all">
-    <?php echo file_get_contents(ROOT.'/node_modules/bootstrap/dist/css/bootstrap.css'); ?>
-    <?php echo file_get_contents(ROOT.'/App/View/style/style.css'); ?>
-</style>
+
 <div class="indexWrapper">
 
-    <header>
-        <nav class="navbar">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">
-                        <h1 class="section-title">
-                            <span class="left-handle"></span>
-                            <span class="title-text">HW AntonSerbin</span>
-                            <span class="right-handle"></span>
-                        </h1>
-                    </a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li class="nav-item "><a href="/index">Home</a></li>
-                    <li class="nav-item "><a href="/goods/category=all">Goods</a></li>
-                    <li class="nav-item "><a href="/cart">Cart</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <?php if (isset($_SESSION['user']['login'])) {
-                        echo "You entered as " . $_SESSION['user']['login'];
-                        echo '<li><a href="/logout" id="loginHeader"> LogOut </a></li>';
-                    } else {
-                        echo '<li><a href="#" id="loginHeader"> Login </a></li>';
-                    } ?>
-                </ul>
-            </div>
-        </nav>
-
-    </header>
+    <?php require_once (ROOT.'/App/View/header/header.php'); ?>
 
     <main>
         <div class="container">
@@ -96,9 +64,9 @@
                     <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Categories
                     </div>
                     <ul class="list-group category_block">
-                        <li class="list-group-item"><a href="/goods/category=all">All Cakes</a></li>
-                        <li class="list-group-item"><a href="/goods/category=classic">Classic Cake</a></li>
-                        <li class="list-group-item"><a href="/goods/category=wosugar">Cake w/o sugar</a></li>
+                        <li class="list-group-item"><a href="/goods/all">All Cakes</a></li>
+                        <li class="list-group-item"><a href="/goods/classic">Classic Cake</a></li>
+                        <li class="list-group-item"><a href="/goods/wosugar">Cake w/o sugar</a></li>
                     </ul>
                 </div>
             </div>
@@ -111,17 +79,5 @@
         </div>
     </footer>
 </div>
-
-<!-- JavaScript Bundle with Popper -->
-
-
-<!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"-->
-<!--        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"-->
-<!--        crossorigin="anonymous"></script>-->
-<!---->
-<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"-->
-<!--        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"-->
-<!--        crossorigin="anonymous"></script>-->
-
 
 </body>
