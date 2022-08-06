@@ -24,7 +24,6 @@ class LoginController
             $uName = $_POST['uName'];
             $psw = md5($_POST['psw']);
 //            $psw = $_POST['psw'];
-            echo $psw . "<br>";
             $loginService = new Login();
             $res = $loginService->checkLogin($uName, $psw);
 
@@ -50,7 +49,6 @@ class LoginController
 
     public function actionLogout()
     {
-        echo "Вызван Логин-Controller->actionLogout1<br>";
         SessionControl::unsetSession("user");
         (new LoginController)->actionShowUserForm();
     }
@@ -59,7 +57,6 @@ class LoginController
     {
         require_once(ROOT . '/App/View/login/registerNewUser.php');
     }
-
 
     public function actionAddNewUser()
     {
@@ -76,7 +73,6 @@ class LoginController
         ];
         $user = new User();
         $alreadyRegistered = $user->read("email", $dataUser['email']);
-        print_r($alreadyRegistered);
         if ($alreadyRegistered) {
             require_once(ROOT . '/App/View/login/badRegistrationEmail.php');
             return false;
@@ -89,7 +85,6 @@ class LoginController
 
     public function actionRestoreFormPassword()
     {
-        echo "LoginController -> actionRestoreFormPassword<br>";
         require_once(ROOT . '/App/View/login/resetLoginForm.php');
     }
 
@@ -111,9 +106,6 @@ class LoginController
             $hash = str_replace('/', '', $hash);
             $content .= $_ENV['WEB_SITE'] . "modifyPassword/" . $hash . "     |       ";
             $content .=  "http://localhost/modifyPassword/" . $hash . "</br>";
-
-//            $res = MailerController::sendEmail($email, 'new Password PHP_Project: ' . date("h:i:sa"), $content);
-//            $res = login::sendEmail($email, 'new Password PHP_Project: ' . date("h:i:sa"), $content);
             login::modifyUserInDb($userArr['id'], "hash", $hash);
             $user = new User();
 
@@ -128,25 +120,16 @@ class LoginController
                 echo "Email has NOT been send";
                 return false;
             }
-
         } else {
             echo "<br>There is no such registered User with E-mail $email<br>";
             return false;
         }
-
     }
 
     public function actionRewritePasswordFromEmail($params)
     {
-        echo "LoginController -> actionRewritePasswordFromEmail<br>";
-//        die();
-//        if (!empty($_SERVER['REQUEST_URI'])) {
-//            $uriArr = explode("/", $_SERVER['REQUEST_URI']);
-//        };
         $hashLink = $params['hash'];
         $loginService = new Login();
-        dd($hashLink);
-        dd($_SESSION);
         $userData = $loginService->checkHash($hashLink);
         if ($userData) {
             $_SESSION['changePasswordUser'] = $userData;
@@ -154,13 +137,12 @@ class LoginController
             require_once(ROOT . "/App/View/login/enterNewPasswordForm.php");
         } else {
             echo "Wrong hash link";
-//            (new LoginController())->actionShowUserForm();
+            (new LoginController())->actionShowUserForm();
         }
     }
 
     public function actionSaveNewPassword()
     {
-        echo "LoginController -> actionSaveNewPassword<br>";
         $newPassword = md5($_POST['psw']);
 //        $newPassword = $_POST['psw'];
         $id = $_SESSION['changePasswordUser']['id'];

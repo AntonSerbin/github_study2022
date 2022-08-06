@@ -190,6 +190,17 @@ main, header, footer {
 .imageMainProduct {
     height: 80%;
 }
+.cardProduct{
+    margin-bottom: 35px;
+
+}
+
+.card-title {
+    color:darkblue;
+}
+.card-text{
+    color: black;
+}
 
 .card-img-top {
     position: relative;

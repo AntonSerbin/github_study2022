@@ -11,7 +11,7 @@
               :category="product.category"
               :price="product.price"
               :image="product.image_name"
-              :is-available="true"
+              :is-available="!!product.quantity_on_stock"
               @add-to-cart="addProductToCart(product)"
           />
         </div>
@@ -22,6 +22,7 @@
 
 <script>
 import Product from "./Product";
+
 export default {
   name: "ProductsList",
   components: {

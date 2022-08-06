@@ -17,22 +17,12 @@
             <div class="cardProduct">
                 <img class="card-img-top" src="/App/View/images/${json[i]['image_name']}" alt="Cake${i}">
                     <div class="card-body">
-                        <h4 class="card-title"><a href=${hrefLinkItem}>${json[i]["title"]}</a></h4>
-                        <p class="card-text"> ${json[i]["title"]} </p>
-                        <div class="d-flex justify-content-between">
-                            <div>
-                                <p class="btn btn-danger btn-block p-2"> ${json[i]['price']} UAH</p>
-                            </div>
-                            <div>
-                                <a href="#" class="btn btn-success btn-block p-2">Add to cart</a>
-                            </div>
-                        </div>
+                        <h3 class="card-title">${json[i]["title"]}</h3>
 
                         <div class="row">
                             <div class="col">
-                                <button class="btn btn-secondary btnAddInfo"
-                                        onclick="window.location.href = '/items/${json[i]['id_good']}'">Additional info
-                                </button>
+                          <p class="card-text"> ${json[i]["description"]}</p>
+
                             </div>
                         </div>
                     </div>
@@ -44,16 +34,21 @@
     }
     fillInHTMLItems();
 </script>
-    <link href="/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
-    <link href="/App/View/style/style.css" rel="stylesheet">
+<link href="/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+<link href="/App/View/style/style.css" rel="stylesheet">
 <body>
 
 <div class="indexWrapper">
 
-    <?php require_once (ROOT.'/App/View/header/header.php'); ?>
+    <?php require_once(ROOT . '/App/View/header/header.php'); ?>
 
     <main>
         <div class="container">
+
+            <h3 style="text-align: center; padding: 30px">Our company bakes two types of the cakes.</h3>
+            <h4 style="text-align: center;padding-bottom: 30px"> You can look through our range of products on this
+                page.</h4>
+
             <div class="row">
                 <div class="col-10">
                     <div class="row" id="itemField">
@@ -61,7 +56,8 @@
                     </div>
                 </div>
                 <div class="col-2 sideNav">
-                    <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Categories
+                    <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i>
+                        Categories
                     </div>
                     <ul class="list-group category_block">
                         <li class="list-group-item"><a href="/goods/all">All Cakes</a></li>

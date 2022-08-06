@@ -28,7 +28,6 @@
                             <label class="form-label">User Login</label>
                             <input name="uName" type="text" class="form-control" required value="Anton"/>
                         </div>
-
                         <div class="form-outline mb-4">
                             <input type="password" name="psw" id="form1Example2" class="form-control" required/>
                             <label class="form-label" for="form1Example2" value="1">Password</label>

@@ -11,7 +11,6 @@ return array(
     'logout' => ['login/logout'], //LoginController -> actionLogout
 
     'sendEmailRestore' => ['login/sendFormPassword'],
-//    'modifyPassword' => ['login/rewritePasswordFromEmail'],
     'modifyPassword/:hash' => ['login/rewritePasswordFromEmail'],
     'saveNewPassword' => ['login/saveNewPassword'],
 
