@@ -17,10 +17,19 @@ const app = createApp({
   },
   methods: {
     addProductToCart(product) {
-      this.cartProducts.push({
-        ...product,
-        amount: 1,
-      });
+      let checkProdInCart = false;
+      for (let i = 0; i < this.cartProducts.length; i++) {
+        if (product["id"] === this.cartProducts[i]["id"]) {
+          this.cartProducts[i]["amount"] = this.cartProducts[i]["amount"] +1;
+          checkProdInCart = true;
+        }
+      }
+      if (!checkProdInCart) {
+        this.cartProducts.push({
+          ...product,
+          amount: 1,
+        });
+      }
     },
     incrementProductAmount(index) {
       const product = this.cartProducts[index];

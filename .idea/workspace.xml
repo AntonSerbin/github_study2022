@@ -2,22 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c574fcc-f74e-44f2-8ef8-d15cc9e11da8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/App/View/footer/footer.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.php-cs-fixer.cache" beforeDir="false" afterPath="$PROJECT_DIR$/.php-cs-fixer.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Controller/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/LoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Service/Login.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Service/Login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Service/MailService.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Service/MailService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/View/cart/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/App/View/cart/cart.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/View/goods/goods.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/View/goods/goods.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/View/login/correctLogin.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/View/login/correctLogin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/View/login/loginPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/View/login/loginPage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/View/login/newUserEntered.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/View/login/newUserEntered.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/View/nav/navCategory.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/View/nav/navCategory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/View/style/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/App/View/style/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Framework/Database/ModelDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/Database/ModelDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/monolog.log" beforeDir="false" afterPath="$PROJECT_DIR$/monolog.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/cart/CartBillingForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/cart/CartBillingForm.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,7 +185,7 @@
       <workItem from="1659544736617" duration="3221000" />
       <workItem from="1659602875164" duration="57943000" />
       <workItem from="1659782772304" duration="34827000" />
-      <workItem from="1659858631528" duration="10034000" />
+      <workItem from="1659858631528" duration="13506000" />
     </task>
     <servers />
   </component>
