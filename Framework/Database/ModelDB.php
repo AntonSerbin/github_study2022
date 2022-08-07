@@ -21,7 +21,7 @@ abstract class ModelDB
     }
 
 
-   public function save()
+    public function save()
     {
         $fields = $this->getFields();
         $strFields = "";
@@ -32,7 +32,7 @@ abstract class ModelDB
                 continue;
             }
             $strFields .= $key . ",";
-            $strValues .= "'".$this->$key . "',";
+            $strValues .= "'" . $this->$key . "',";
         };
         $strFields = rtrim($strFields, ",");
         $strValues = rtrim($strValues, ",");
@@ -100,17 +100,14 @@ abstract class ModelDB
     public function write($column, $elem)
     {
         $pdo = ConnectionDB::getInstance()->getPdo();
-//        echo $this->table, $column, $elem . '<br>';
 //        $sqlStr = "INSERT INTO '"."$table' ('"."$column') VALUE ('"."$elem');";
         $sqlStr = "INSERT INTO " . $this->table . " $column VALUES (" . "'" . $elem . "');";
 
         $insertStatement = $pdo->prepare($sqlStr);
-        if ($insertStatement->execute()) {
-//            echo "New data  added to DB successfully";
-            return true;
-        } else {
-//            echo "Unable to create user record";
-//            die();
+        try {
+            $insertStatement->execute();
+        } catch (Exception $e) {
+            return false;
         }
         return true;
     }
@@ -140,12 +137,10 @@ abstract class ModelDB
 //        echo $table, $column, $elem , $whereColumn, $whereElem,'<br>';
         $sqlStr = "UPDATE " . $this->table . " SET $column = '" . $elem . "' WHERE ($whereColumn='" . $whereElem . "');";
         $insertStatement = $pdo->prepare($sqlStr);
-        if ($insertStatement->execute()) {
-//            echo "New data  added to DB successfully";
-            return true;
-        } else {
-//            echo "Unable to create user record";
-//            die();
+        try {
+            $insertStatement->execute();
+        } catch (Exception $e) {
+            return false;
         }
         return true;
     }
@@ -155,12 +150,10 @@ abstract class ModelDB
         $pdo = ConnectionDB::getInstance()->getPdo();
         $sqlStr = "TRUNCATE TABLE " . $this->table;
         $insertStatement = $pdo->prepare($sqlStr);
-        if ($insertStatement->execute()) {
-//            echo "Table truncated ";
-            return true;
-        } else {
-//            echo "Unable to create user record";
-            die();
+        try {
+            $insertStatement->execute();
+        } catch (Exception $e) {
+            return false;
         }
         return true;
     }
@@ -170,12 +163,10 @@ abstract class ModelDB
         $pdo = ConnectionDB::getInstance()->getPdo();
         $sqlStr = "TRUNCATE TABLE " . $this->table;
         $insertStatement = $pdo->prepare($sqlStr);
-        if ($insertStatement->execute()) {
-//            echo "Table truncated ";
-            return true;
-        } else {
-//            echo "Unable to create user record";
-            die();
+        try {
+            $insertStatement->execute();
+        } catch (Exception $e) {
+            return false;
         }
         return true;
     }
@@ -194,13 +185,20 @@ abstract class ModelDB
         $sqlStr = substr($sqlStr, 0, -1) . ");";
 
         $insertStatement = $pdo->prepare($sqlStr);
-        if ($insertStatement->execute()) {
+        try {
+            $insertStatement->execute();
+        } catch (Exception $e) {
+            return false;
+        }
+
+//        if ($insertStatement->execute()) {
+
 //            echo "New data  added to DB successfully";
-            return true;
-        } else {
+//            return true;
+//        } else {
 //            echo "Unable to create user record";
 //            die();
-        }
+//        }
         return true;
     }
 

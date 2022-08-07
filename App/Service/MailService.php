@@ -57,9 +57,11 @@ class MailService
         $strContent .= "</table > ";
         $strContent .= "</main>";
 
-        $strContent .= "<h6> Our manager will get in touch with you in 12 hours.</h6>";
-        $strContent .= "<h6> Thank you for order and #StandWithUkaine! </h6>";
-
+        $strContent .= "<h4> Our manager will get in touch with you in 12 hours by number "
+            . $orderData[0]['phone'] . "</h4>";
+        $strContent .= "<h4> Thank you for thr order and 
+                        <strong style='background-image:linear-gradient(to left,SteelBlue, yellow);'>
+                        #StandWithUkaine.</strong> </h4>";
         return $strContent;
     }
 

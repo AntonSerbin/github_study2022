@@ -2,18 +2,11 @@
 
 <div class="indexWrapper">
     <?php require_once (ROOT.'/App/View/header/header.php'); ?>
-    <?php require_once (ROOT.'/App/View/nav/navCategory.php'); ?>
+<!--    <?php require_once (ROOT.'/App/View/nav/navCategory.php'); ?>-->
 
     <div id="app">
         <main>
-
-            <cart-button
-                    style="  position: sticky;
-                    top: 10%;
-                    transform: scale(200%);
-                    margin-left: 2%;
-                   ">
-            </cart-button>
+            <cart-button id="cartButton"></cart-button>
             <router-view></router-view>
             <products-list></products-list>
             <cart-modal></cart-modal>
@@ -22,3 +15,9 @@
 </div>
 <script src="/public/js/main.js"></script>
 </body>
+<script>
+    import CartButton from "../../../tmp/vue3-edu-store-master/src/components/CartButton";
+    export default {
+        components: {CartButton}
+    }
+</script>

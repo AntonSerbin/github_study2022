@@ -5,16 +5,11 @@
 
     form {
         border: 3px solid #f1f1f1;
-        width: 40%;
+        width: 70%;
     }
 
     button {
-        background-color: #04AA6D;
-        color: white;
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        cursor: pointer;
+
         width: 100%;
     }
 
@@ -28,13 +23,13 @@
 </style>
 <body>
 <div class="container">
-
+    <?php require_once (ROOT.'/App/View/header/header.php'); ?>
     <h2>New User entered</h2>
 
     <form action="login" method="post">
         <div class="container">
             <h2> Thank you, <?php echo $dataUser['login']; ?> are Signed in </h2>
-            <button action="data">OK</button>
+            <button class="btn btn-primary" action="data">OK</button>
 
         </div>
 

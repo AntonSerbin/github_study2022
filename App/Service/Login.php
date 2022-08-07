@@ -16,7 +16,7 @@ class Login
 
         foreach ($elementsDB as $user) {
             if ($user['login'] == $name && $user['password'] == $password) {
-//                echo "password correct - " . $password . "<br>";
+//              echo "password correct - " . $password . "<br>";
                 return $user;
             }
         }
@@ -43,26 +43,16 @@ class Login
         return $elementsDB[0];
     }
 
-//    public function readDataConnectionById($id)
-//    {
-//        $pdo = ConnectionDB::getInstance()->getPdo();
-////        $sqlStr = "select * from dbconnect where iduser=$id";
-//        $elementsDB = $pdo->query($sqlStr)->fetchAll();
-//        return $elementsDB;
-//    }
-
     public function deleteDataConnectionById($id)
     {
         $pdo = ConnectionDB::getInstance()->getPdo();
         $sqlStr = "delete from dbconnect where iduser=$id";
         $insertStatement = $pdo->prepare($sqlStr);
-        if ($insertStatement->execute()) {
-//            echo "Record has been deleted successfully";
-        } else {
-//            echo "Unable to delete record";
-            die();
+        try {
+            $insertStatement->execute();
+        } catch (Exception $e) {
+            return false;
         }
-        return true;
     }
 
     public static function addUserIntoDb($userData)
@@ -76,11 +66,9 @@ class Login
         $pdo = ConnectionDB::getInstance()->getPdo();
         $sqlStr = "UPDATE users SET $nameOfColumn = '$newVolume' WHERE id = '$idUser'";
         $insertStatement = $pdo->prepare($sqlStr);
-        if ($insertStatement->execute()) {
-//            echo "Modified $nameOfColumn from User ID $idUser to $newVolume<br>";
-            return true;
-        } else {
-//            echo "Unable to modify user record";
+        try {
+            $insertStatement->execute();
+        } catch (Exception $e) {
             return false;
         }
     }
@@ -97,13 +85,11 @@ class Login
             ");";
         $pdo = ConnectionDB::getInstance()->getPdo();
         $insertStatement = $pdo->prepare($sqlStr);
-        if ($insertStatement->execute()) {
-            echo "New record created successfully";
-            unset($sqlStr);
-            return true;
-        } else {
-            echo "Unable to create record";
-            die();
+        $insertStatement = $pdo->prepare($sqlStr);
+        try {
+            $insertStatement->execute();
+        } catch (Exception $e) {
+            return false;
         }
     }
 }

@@ -60,7 +60,6 @@ class LoginController
 
     public function actionAddNewUser()
     {
-        echo "LoginController -> actionAddNewUser<br>";
         $phone = preg_replace('~\D+~', '', $_POST['phone']);
         $dataUser = [
             'login' => $_POST['login'],

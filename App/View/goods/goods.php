@@ -55,25 +55,14 @@
                         <!--elements added-->
                     </div>
                 </div>
-                <div class="col-2 sideNav">
-                    <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i>
-                        Categories
-                    </div>
-                    <ul class="list-group category_block">
-                        <li class="list-group-item"><a href="/goods/all">All Cakes</a></li>
-                        <li class="list-group-item"><a href="/goods/classic">Classic Cake</a></li>
-                        <li class="list-group-item"><a href="/goods/wosugar">Cake w/o sugar</a></li>
-                    </ul>
-                </div>
+                <?php require_once(ROOT . '/App/View/nav/navCategory.php'); ?>
             </div>
         </div>
     </main>
 
-    <footer class="page-footer font-small blue">
-        <div class="footer-copyright text-center py-3">© 2022 Copyright:
-            <a href="index.html"> HW Nix </a>
-        </div>
-    </footer>
+    <?php require_once(ROOT . '/App/View/footer/footer.php'); ?>
+
+
 </div>
 
 </body>

@@ -1,5 +1,0 @@
-Text sting str1
-Text sting str2
-Text sting str3
-
-
