@@ -20,8 +20,6 @@ function dd($el)
     print_r($el);
     echo "</pre>";
 }
-
-
 //2. Подключение файлов
 
 define("ROOT", dirname(__FILE__));
@@ -33,10 +31,14 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 $MAILER_DSN = $_ENV['MAILER_DSN'];
 
-//4 Создаем канал журнала
-$logger = new Logger('MonologLogger');
-$logger->pushHandler(handler: new StreamHandler(ROOT . '/monolog.log'));
-$logger->debug('Index.php started');
+//4 Создаем канал журнала логгирования
+function logMonolog($text)
+{
+    $logger = new Logger('MonologLogger');
+    $logger->pushHandler(handler: new StreamHandler(ROOT . '/monolog.log'));
+    $logger->debug($text);
+}
+logMonolog("started INDEX.PHP");
 
 //5. Включаем фреймворк сессии
 $sessionControl = new SessionControl();

@@ -6,9 +6,7 @@ use App\Entity\Goods;
 use App\Entity\OrderGoods;
 use App\Entity\Orders;
 use App\Entity\Receiver;
-use App\Entity\User;
 use App\Service\MailService;
-use Framework\Mail\MailerController;
 use Framework\Session\SessionControl;
 
 class DataController
@@ -56,16 +54,13 @@ class DataController
             ->where("orders.id", $orderId)
             ->select();
 
-
-
-
-
-
-
         $mailService = new MailService();
+
         $mailService->sendOrderCreated($arrUserFromJSON["email"], $orderData);
 
         echo json_encode(["orderId" => $orderId]);
+        logMonolog("Order saved , $orderId");
+
     }
 
     public function actionShowOrder($params)
@@ -108,8 +103,6 @@ class DataController
 
     public function actionShowPageItem($params)
     {
-        echo "Вызван DataController->actionShowPageItem<br>";
-        echo "<br>";
         $goods = new Goods();
         $itemInfo = $goods->read("id_good", $params["id"]);
         require_once(ROOT . '/App/View/goods/item.html');

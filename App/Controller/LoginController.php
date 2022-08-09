@@ -19,6 +19,7 @@ class LoginController
 
     public function actionCheckLogin()
     {
+
         $postData = ($_POST) ? true : false;
         if ($postData) {
             $uName = $_POST['uName'];
@@ -34,6 +35,7 @@ class LoginController
                 SessionControl::writeDataToSession('firstname', $res['firstname']);
                 SessionControl::writeDataToSession('secondname', $res['secondname']);
                 SessionControl::writeDataToSession('phone', $res['phone']);
+                logMonolog("user ".$res['email']." saves to Session ");
 
                 require_once(ROOT . '/App/View/login/correctLogin.php');
 
@@ -50,6 +52,7 @@ class LoginController
     public function actionLogout()
     {
         SessionControl::unsetSession("user");
+        logMonolog(" session unset");
         (new LoginController)->actionShowUserForm();
     }
 
@@ -60,6 +63,7 @@ class LoginController
 
     public function actionAddNewUser()
     {
+
         $phone = preg_replace('~\D+~', '', $_POST['phone']);
         $dataUser = [
             'login' => $_POST['login'],
@@ -77,6 +81,8 @@ class LoginController
             return false;
         } else {
             Login::addUserIntoDb($dataUser);
+            logMonolog("actionAddNewUser new user ".$dataUser['email']." added to DB");
+
             require_once(ROOT . '/App/View/login/newUserEntered.php');
             return true;
         }
@@ -149,6 +155,7 @@ class LoginController
 
         $user->update('password', $newPassword, "id", $id);
         unset($_SESSION['changePasswordUser']);
+        logMonolog("actionSaveNewPassword new pass saved, session unset");
         (new LoginController())->actionShowUserForm();
     }
 }

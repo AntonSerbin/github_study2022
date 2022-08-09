@@ -76,6 +76,7 @@ class MailService
             $subject,
             $this->createContentOrderPlaced($orderData)
         );
+        logMonolog("EMail sent , $email");
     }
 }
 

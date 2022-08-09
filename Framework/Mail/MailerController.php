@@ -36,9 +36,6 @@ class MailerController
             echo "error!!<br> $e";
             return "false error!";
         }
-
-        echo "<br>---------------2------------<br>";
-
     }
 
 }

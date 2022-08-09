@@ -2,12 +2,6 @@
 
 namespace Framework\Database;
 
-use Framework\Database\ConnectionDB;
-use JetBrains\PhpStorm\NoReturn;
-use Symfony\Component\Console\Helper\Table;
-use function Symfony\Component\String\s;
-
-
 abstract class ModelDB
 {
     protected string $table;
@@ -19,7 +13,6 @@ abstract class ModelDB
     {
         $this->pdo = ConnectionDB::getInstance()->getPdo();
     }
-
 
     public function save()
     {
@@ -52,9 +45,7 @@ abstract class ModelDB
 
     public function join($table2, $column1, $column2)
     {
-
         $this->sqlStr .= "INNER JOIN " . $table2 . " ON " . $column1 . "=" . $column2 . " ";
-
         return $this;
     }
 
@@ -66,7 +57,6 @@ abstract class ModelDB
         if ($this->whereAdded) {
             $this->sqlStr .= " AND " . $key . " = '" . $value . "'";
         }
-
         $this->whereAdded = true;
         return $this;
     }
@@ -112,7 +102,6 @@ abstract class ModelDB
         return true;
     }
 
-
     public function find($column, $elem, $requestColumn)
     {
         $pdo = ConnectionDB::getInstance()->getPdo();
@@ -120,7 +109,6 @@ abstract class ModelDB
         $elementsDB = $pdo->query($sqlStr)->fetchAll();
         return $elementsDB;
     }
-
 
     public function readLastString()
     {
@@ -190,15 +178,6 @@ abstract class ModelDB
         } catch (Exception $e) {
             return false;
         }
-
-//        if ($insertStatement->execute()) {
-
-//            echo "New data  added to DB successfully";
-//            return true;
-//        } else {
-//            echo "Unable to create user record";
-//            die();
-//        }
         return true;
     }
 
@@ -210,8 +189,5 @@ abstract class ModelDB
                 return true;
             }
         }, ARRAY_FILTER_USE_KEY);
-        die();
-
     }
-
 }
